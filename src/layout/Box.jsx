@@ -1,4 +1,4 @@
-import { css } = '@emotion/react'
+import { css } from '@emotion/react'
 
 const Box = (props) => {
 

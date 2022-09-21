@@ -1,4 +1,4 @@
-import fakeServer from './fake-server.ts'
+import fakeServer from './fake-server.js'
 
 export async function login (user) {
 

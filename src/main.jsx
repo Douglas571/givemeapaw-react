@@ -10,7 +10,7 @@ import 'material-icons/iconfont/material-icons.css'
 // Own CSS
 import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
