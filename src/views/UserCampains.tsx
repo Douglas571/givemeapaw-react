@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom'
 
 import {getCampains} from '@/libs'
 
-let campains = await getCampains()
+
 
 const UserCampains = () => {
+  let campains = []//await getCampains()
+
+
 
   return (
     <div>
