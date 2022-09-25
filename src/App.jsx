@@ -47,6 +47,7 @@ function App() {
 
 
     height: 100%;
+    font-size: 1.6rem;
 
     .nav-menu {
       display: flex;
@@ -55,7 +56,7 @@ function App() {
       padding: 1rem;
     }
 
-    .title {
+    .nav-menu .title {
       font-size: 2rem;
     }
   `
@@ -104,7 +105,7 @@ function MainRoute() {
   }
 
   return (
-    <div>
+    <>
       <div className="nav-menu">
         <button onClick={toggleMenu}>Menu</button>
         <h1 className="title">Dame Una Pata</h1>
@@ -115,7 +116,7 @@ function MainRoute() {
 
       <Outlet/>
 
-    </div>
+    </>
 
     )
 }
