@@ -1,9 +1,11 @@
-import fakeServer from './fake-server.js'
+export * as api from './api'
+
+import * as fakeServer from './fake-server.js'
 
 export async function login (user) {
 
 
-  const theUser = fakeServer.users.find( u => u.email === user?.email )
+  const theUser = fakeServer.data.users.find( u => u.email === user?.email )
 
   let err 
   if (!theUser) {
@@ -21,8 +23,4 @@ export async function login (user) {
   console.log({theUser})
 
   return '17034781975829058'
-}
-
-export async function getCampains() {
-  return fakeServer.campains
 }

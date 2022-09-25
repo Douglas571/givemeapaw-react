@@ -3,8 +3,10 @@ import { useNavigate, Link } from 'react-router-dom'
 
 import IconButton from '@/components/IconButton'
 
-const DeadEndMenu = () => {
+const DeadEndMenu = (props) => {
   const navigate = useNavigate()
+  const { right } = props
+
   const CSS = css`
     margin: 1rem;
   `
@@ -20,6 +22,7 @@ const DeadEndMenu = () => {
         onClick={goBack}
       />
       
+      { right }
     </div>
   )
 }

@@ -32,8 +32,12 @@ import Login from '@/views/Login'
 import Regist from '@/views/Regist'
 import RecoverPassword from '@/views/RecoverPassword'
 
+import Donation from '@/views/Donation'
+import Campaigns from '@/views/Campaigns'
+import CampaignsView from '@/views/CampaignsView'
+
 import User from '@/views/User'
-import UserCampains from '@/views/UserCampains'
+//import UserCampains from '@/views/UserCampains'
 
 
 function App() {
@@ -44,8 +48,15 @@ function App() {
 
     height: 100%;
 
+    .nav-menu {
+      display: flex;
+      gap: 1rem;
+
+      padding: 1rem;
+    }
+
     .title {
-      font-size: 3rem;
+      font-size: 2rem;
     }
   `
 
@@ -58,15 +69,15 @@ function App() {
           <Routes>
 
             <Route path="/" element={<MainRoute/>}>
-
               <Route path="me" element={<ProtectedRoute/>}>
-
                 <Route index element={<User/>}/>
-                <Route path="campains" element={<UserCampains/>}/>
-
                 <Route path="*" element={<NoMatch/>}/>
-
               </Route>
+
+              <Route path="donation" element={<Donation/>}/>
+
+              <Route path="campaigns" element={<Campaigns/>}/>
+              <Route path="campaigns/:id" element={<CampaignsView/>}/>
 
               <Route path="*" element={<NoMatch/>}/>
 
@@ -75,8 +86,7 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/regist" element={<Regist/>}/>
             <Route path="/recover-password" element={<RecoverPassword/>}/>
-
-            <Route path="*" element={<NoMatch/>}/>          
+         
           </Routes>
 
 
@@ -85,8 +95,6 @@ function App() {
     </AuthProvider>
   )
 }
-
-
 
 function MainRoute() {
   const [showMenu, setShowMenu] = useState(false)
@@ -97,8 +105,11 @@ function MainRoute() {
 
   return (
     <div>
-      <h1 className="title">Dame Una Pata</h1>
-      <button onClick={toggleMenu}>Menu</button>
+      <div className="nav-menu">
+        <button onClick={toggleMenu}>Menu</button>
+        <h1 className="title">Dame Una Pata</h1>
+      </div>
+      
 
       <MainMenu show={showMenu} onClose={toggleMenu}/>
 
