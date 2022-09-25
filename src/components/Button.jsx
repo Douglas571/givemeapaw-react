@@ -20,11 +20,15 @@ const Button = (props) => {
 
     transition: all .2s ease;
 
+    &:hover {
+      background-color: var(--primary-dark);
+    }
+
     &:active {
       background-color: var(--primary-dark);
     }
 
-    &:focuse {
+    &:focus {
       outline: none;
       background-color: var(--primary-dark); 
     }

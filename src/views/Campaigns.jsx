@@ -19,7 +19,7 @@ const CSS = css`
   .campaigns-list {
 
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+    grid-template-columns: repeat(auto-fill, minmax(250px, auto));
     gap: 2rem;
   }
 

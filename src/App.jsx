@@ -37,6 +37,8 @@ import Campaigns from '@/views/Campaigns'
 import CampaignsView from '@/views/CampaignsView'
 
 import User from '@/views/User'
+
+import Footer from '@/components/Footer'
 //import UserCampains from '@/views/UserCampains'
 
 
@@ -46,7 +48,7 @@ function App() {
   const styles = css`
 
 
-    height: 100%;
+    overflow: scroll;
     font-size: 1.6rem;
 
     .nav-menu {
@@ -116,6 +118,7 @@ function MainRoute() {
 
       <Outlet/>
 
+      <Footer/>
     </>
 
     )
