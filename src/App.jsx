@@ -77,10 +77,9 @@ function App() {
                 <Route path="*" element={<NoMatch/>}/>
               </Route>
 
-              <Route path="donation" element={<Donation/>}/>
-
               <Route path="campaigns" element={<Campaigns/>}/>
               <Route path="campaigns/:id" element={<CampaignsView/>}/>
+              <Route path="campaigns/:id/donation" element={<Donation/>}/>
 
               <Route path="*" element={<NoMatch/>}/>
 

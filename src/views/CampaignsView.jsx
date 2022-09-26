@@ -42,6 +42,20 @@ const CSS = css`
 
   .donation-panel {
     padding: 1rem 0;
+
+    .msg {
+      font-size: 2rem;
+      margin: 1rem 0;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .actions .button:last-child {
+      flex: 1;
+    }
   }
 `
 
@@ -52,7 +66,7 @@ const CampaignsView = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const [ campaign, setCampaign ] = useState([])//await getCampains()
-  const donationAmount = useRef()
+  
 
   const [ isDonating, setDonating ] = useState(false)
 
@@ -70,20 +84,6 @@ const CampaignsView = () => {
     setDonating(!isDonating)
   }
 
-  const handleDonation = (value) => {
-    const amount = Number(value)
-
-    if (!amount) return toggleDonationPanel()
-
-    const s = new URLSearchParams()
-    s.append('amount', amount)
-    s.append('to', campaign.id)
-
-    const url = `/donation?${s.toString()}`
-    console.log({url})
-    navigate(url)
-  }
-
   const coverCSS = css`
     .cover {
       background-image: url(${campaign.img});
@@ -91,6 +91,26 @@ const CampaignsView = () => {
       background-position: center;
     }
   `
+
+  const [donationAmount, setDonationAmount] = useState(0)
+  const min = 1
+
+  const donationPanelHandleInput = (value) => {
+    console.log('new value: ', value)
+    setDonationAmount(value)
+  }
+
+  const handleDonation = () => {
+    if (!donationAmount) return toggleDonationPanel()
+
+    const s = new URLSearchParams()
+    s.append('amount', donationAmount)
+
+    const url = `donation?${s.toString()}`
+    console.log({url})
+    navigate(url)
+  }
+
 
   return (
     <div className="campaign" css={[CSS, coverCSS]}>   
@@ -111,16 +131,19 @@ const CampaignsView = () => {
           <div className="donation-panel">
             { isDonating
               ? (<div>
-                  <p>¿Cuánto deseas donar?</p>
+                  <p class="msg">¿Cuánto deseas donar? (min {min}$)</p>
                   <DonationPanelInput
                     max={campaign.goal - campaign.raised}
-                    min={0}
+                    min={min}
                     name="donation-amout"
-                    onValue={}
+                    onInput={donationPanelHandleInput}
+
+                    value={donationAmount}
                   />
-                  <div>
-                    <button onClick={handleDonation}>Realizar Donación</button>
-                    <button onClick={toggleDonationPanel}>Cancelar</button>
+                  <div class="actions">
+                    <Button onClick={handleDonation}>Realizar Donación</Button>
+                    <Button onClick={toggleDonationPanel}
+                      type="error">Cancelar</Button>
                   </div>
                 </div>)
               : (<Button onClick={toggleDonationPanel}>Donar</Button>)

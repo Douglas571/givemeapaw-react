@@ -7,6 +7,7 @@ const CSS = css`
   overflow: hidden;
 
   padding: 1.5rem;
+  margin-bottom: 1rem;
   border: 1px solid var(--gray);
 
   color: var(--black);
@@ -75,7 +76,7 @@ const CSS = css`
 
 const DonationPanelInput = (props) => {
   const [isFocus, setIsFocus] = useState(false);
-  const { onValue } = props
+  const { value, onInput } = props
 
   const onFocus = (evt) => {
     console.log('focus')
@@ -88,11 +89,30 @@ const DonationPanelInput = (props) => {
   }
 
   const onUpdate = (evt) => {
-    console.log('update: ', evt.target.value)
-    onValue(evt.target.value)
+    
+    onInput(evt.target.value)
   }
 
-  //to-do: Inplement a onFocus styles.
+  const handleArrow = (evt) => {
+    const { code } = evt
+
+    let newValue = 0
+    if (code === "ArrowUp") {
+      console.log("+1")
+      newValue = +(value + 0.1).toFixed(12) // 0.3
+      onInput(newValue)
+    }
+
+    if (code === "ArrowDown") {
+      console.log("-1")
+      newValue = +(value - 0.1).toFixed(12) // 0.3
+      onInput(newValue)
+    }
+
+  }
+
+  //TO-DO: Implement a non 'type="number"'
+  // onKeyDown={handleArrow}
 
   const className = isFocus ? ' focus' : ''
 
@@ -100,16 +120,19 @@ const DonationPanelInput = (props) => {
     <div css={CSS} className={className}>
       <div className="currency"><span className="simbol">$</span><span>USD</span></div>
       <div className="amount">
-        <input type="text" 
+        <input 
+          type="number"
           placeholder="1.00"
           inputMode="decimal"
           step="0.01"
+
+          value={value}
 
           onFocus={onFocus}
           onBlur={onBlur}
           onChange={onUpdate}
 
-          {...props}
+          {...{ ...props, onInput: undefined }}
           />
       </div>
     </div>

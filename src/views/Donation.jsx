@@ -1,5 +1,7 @@
 import { useParams, useSearchParams } from 'react-router-dom'
 
+import DeadEndLayout from '@/layout/DeadEndLayout'
+
 const Donation = () => {
   const params = useParams()
   const [searchParams] = useSearchParams()
@@ -11,7 +13,7 @@ const Donation = () => {
     return amount
   }
   return (
-    <div>
+    <DeadEndLayout>
       <h1>Donation</h1>
 
       <h2>Metodos de pago</h2>
@@ -27,7 +29,7 @@ const Donation = () => {
       <h3>PayPal</h3>
       <p>No idea how to pay by paypal</p>
 
-    </div>
+    </DeadEndLayout>
 
   )
 }

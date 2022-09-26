@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 
 const Button = (props) => {
-  const { children } = props
+  const { children, type } = props
 
   const CSS = css`
   
@@ -16,7 +16,7 @@ const Button = (props) => {
     
 
     border: 0px;
-    border-radius: 1rem;
+    border-radius: .5rem;
 
     transition: all .2s ease;
 
@@ -32,11 +32,20 @@ const Button = (props) => {
       outline: none;
       background-color: var(--primary-dark); 
     }
+
+    &.error {
+      background-color: hsl(0deg 95% 62%);
+    }
   
   `
 
+  let className = "button"
+  console.log({type})
+  className += (type === "error") ? ' error' : ''
+
   return (
     <button 
+      className={className}
       css={CSS}
       {...props}>
 
