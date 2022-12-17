@@ -16,10 +16,20 @@ const CSS = css`
 
     font-size: 3rem;
     font-weight: 700;
+
+    text-align: center;
   }
 
   .container {
     margin: 2rem;
+    background: var(--cultured);
+    padding: 2rem;
+
+    box-shadow: 0px 8px 13px 0px rgba(0,0,0,0.35);
+    -webkit-box-shadow: 0px 8px 13px 0px rgba(0,0,0,0.35);
+    -moz-box-shadow: 0px 8px 13px 0px rgba(0,0,0,0.35);
+
+    border-radius: 3px;
   }
 
   p {

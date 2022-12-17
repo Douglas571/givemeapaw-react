@@ -1,8 +1,12 @@
 import { css } from '@emotion/react'
 
 const CSS = css`
-  margin: 3rem;
+  padding: 3rem;
+  text-align: center;
 
+  background: var(--onyx);
+  color: var(--cultured);
+  
 `
 
 const Footer = () => {

@@ -3,11 +3,13 @@ import Icon from '@/components/Icon'
 
 const IconButton = (props) => {
   
-  const { be, icon } = props
+  const { be, color, icon } = props
 
   const CSS = css`
     border: 1px solid transparent;
     background: transparent;
+
+    color: ${color};
 
     width: 3rem;
     height: 3rem;
@@ -21,7 +23,7 @@ const IconButton = (props) => {
     transition: all .3s ease;
 
     &:active {
-      background: hsla(0, 0%, 0%, .3);
+      background: hsla(0, 0%, 0%, .1);
     }
 
   `

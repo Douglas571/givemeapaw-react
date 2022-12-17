@@ -1,12 +1,28 @@
 :root {
-  --white: hsl(0, 0%, 90%);
-  --black: hsl(0, 0%, 15%);
-  --gray: hsl(0, 0%, 50%);
-
-  --primary-color: hsl(88deg 100% 65%);
+  --primary-color: hsla(28, 67%, 44%, 1);/*hsl(88deg 100% 43%);*/
   --primary-dark: hsl(88deg 76% 42%);
   
   --blue: hsl(158deg 61% 52%);
+
+  --dark-olive-green: hsla(74, 32%, 32%, 1);
+  --kombu-green: hsla(88, 38%, 15%, 1);
+  --cornsilk: hsla(52, 94%, 94%, 1);
+  --earth-yellow: hsla(32, 65%, 62%, 1);
+  --liver-dogs: hsla(28, 67%, 44%, 1);
+
+            --cultured: hsla(210, 17%, 98%, 1);
+          --cultured-2: hsla(210, 16%, 93%, 1);
+           --gainsboro: hsla(210, 14%, 89%, 1);
+          --light-gray: hsla(210, 14%, 83%, 1);
+  --cadet-blue-crayola: hsla(210, 11%, 71%, 1);
+        --sonic-silver: hsla(208, 7%, 46%, 1);
+          --davys-grey: hsla(210, 9%, 31%, 1);
+                --onyx: hsla(210, 10%, 23%, 1);
+         --eerie-black: hsla(210, 11%, 15%, 1);
+
+  --white: var(--cultured);
+  --black: var(--eerie-black:);
+  --gray: hsl(0, 0%, 50%);
 }
 
 * {
@@ -29,6 +45,10 @@ h1, h2, h3, h4, h5, h6 {
 a, a:hover, a:focus {
   color: inherit;
   text-decoration: none;
+}
+
+body {
+  /*background: var(--onyx);*/
 }
 
 #root {
