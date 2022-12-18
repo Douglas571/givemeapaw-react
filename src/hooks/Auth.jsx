@@ -13,10 +13,11 @@ export const AuthProvider = (props) => {
 
   const handleLogin = async (userData) => {
     try {
-      const token = await login(userData)
+      const { token, user } = await login(userData)
       console.log('the token is: ', token)
 
       setToken(token)
+      setUser(user)
 
     } catch(err) {
       throw err

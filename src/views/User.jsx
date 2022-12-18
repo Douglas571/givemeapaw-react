@@ -5,6 +5,7 @@ import { css } from '@emotion/react'
 
 import useLocalStorage from '@/hooks/useLocalStorage'
 import useCampaigns from '@/hooks/useCampaigns'
+import { useAuth } from '@/hooks/Auth'
 
 import { api as API } from '@/libs'
 
@@ -21,15 +22,13 @@ const CSS = css`
 `
 
 const User = () => {
-  const user = {
-    name: 'douglas571'
-  }
+  const { user } = useAuth()
 
   const [ campaigns, updateCampaigns ] = useCampaigns()
 
   return (
     <div css={CSS}>
-      <h1>Bienvenido {user.name}</h1>
+      <h1>Bienvenido {user.username}</h1>
 
       <div className="info">
         <p>En {APP_TITLE} nos aseguramos de que quienes soliciten 

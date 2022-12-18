@@ -2,25 +2,36 @@ export * as api from './api'
 
 import * as fakeServer from './fake-server.js'
 
-export async function login (user) {
+export async function login (authData) {
+  //const theUser = fakeServer.data.users.find( u => u.email === user?.email )
 
+  console.log({authData})
 
-  const theUser = fakeServer.data.users.find( u => u.email === user?.email )
+  const requestURL = 'http://localhost:1337/api/auth/local';
+
+  const response = await fetch(requestURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      identifier: authData.email,
+      password: authData.password
+    })
+  })
+
+  console.log({response})
+  const data = await response.json()
+  console.log({data})
+
+  const {jwt, user} = data
+  console.log({jwt, user}) 
 
   let err 
-  if (!theUser) {
-    err = new Error('Invalid e-mail.')
-    err.type = 'email'
+  if (data.error) {
+    err = new Error(data.error.message)
     throw err
   }
 
-  if (!(theUser.password === user?.password)) {
-    err = new Error('Invalid password.')
-    err.type = 'password'
-    throw err
-  }
-
-  console.log({theUser})
-
-  return '17034781975829058'
+  return {token: jwt, user}
 }
