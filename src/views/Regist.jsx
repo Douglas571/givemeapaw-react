@@ -52,27 +52,49 @@ const CSS = css`
 `
 
 const Regist = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('registrando')
+
+    const {name, surname, email, password} = e.target.elements
+    
+    const newUser = {
+      name: name.value, 
+      surname: surname.value, 
+      email: email.value,
+      password: password.value
+    }
+
+    console.log({newUser})
+  }
+
+  
+
   return (
     <DeadEndLayout>
       <div css={CSS}>
         <div className="container">
           <h1 className="title">Registro</h1>
-          <form>
+          <form onSubmit={handleSubmit}>
 
             <TextField
+              name='name'
               placeholder="Nombre"
               icon={<Icon be="account_circle"/>}/>
 
             <TextField
+              name='surname'
               placeholder="Apellido"
               icon={<Icon/>}/>
 
             <TextField
+              name='email'
               placeholder="Correo"
               icon={<Icon be="email"/>}/>
 
             <div>
               <TextField
+                name='password'
                 placeholder="Contraseña"
                 icon={<Icon be="key"/>}/>              
             </div>

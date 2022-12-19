@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, useContext } from 'react'
 
-import { login } from '@/libs'
+import { login, regist } from '@/libs'
 import useLocalStorage from '@/hooks/useLocalStorage'
 
 const AuthContext = createContext(null)
@@ -28,11 +28,25 @@ export const AuthProvider = (props) => {
     setToken('')
   }
 
+  const handleRegist = async (newUser) => {
+    try {
+      const { token, user } = await regist(newUser)
+      console.log('the token is: ', token)
+
+      setToken(token)
+      setUser(user)
+
+    } catch(err) {
+      throw err
+    }
+  }
+
   const value = {
     user,
     token,
     onLogin: handleLogin,
-    onLogout: handleLogout
+    onLogout: handleLogout,
+    onRegist: handleRegist
   }
 
   return (

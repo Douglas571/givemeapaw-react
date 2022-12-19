@@ -7,7 +7,7 @@ import Icon from '@/components/Icon'
 const input = (props) => {
 
   const { icon } = props
-  const id = `email-${useId()}`
+  const id = `input-${useId()}`
 
 
   const CSS = css`

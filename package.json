@@ -10,25 +10,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "currency.js": "^2.0.4",
+    "material-icons": "^1.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.0",
-
-    "currency.js": "^2.0.4",
-
-    "material-icons": "^1.11.10"
+    "recoil": "^0.7.6"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.10.2",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/react-router": "^5.1.19",
-
     "@vitejs/plugin-react": "^2.1.0",
-
-    "@emotion/babel-plugin": "^11.10.2",
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",    
-    
     "vite": "^3.1.0"
   }
 }

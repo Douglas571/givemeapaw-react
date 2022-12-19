@@ -15,9 +15,10 @@ import { AuthProvider, useAuth } from '@/hooks/Auth'
 
 import Theme from '@/theme.js'
 
-import Home from '@/views/Home.jsx'
+import Home from '@/views/Home'
 import Login from '@/views/Login'
-import User from '@/views/User.jsx'
+import Regist from '@/views/Regist'
+import User from '@/views/User'
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
                         <Routes>
                             <Route path="/" element={<Home/>}/>
                             <Route path="/login" element={<Login/>}/>
+                            <Route path="/regist" element={<Regist/>}/>
                             <Route path="me" element={<ProtectedRoute/>}>
                                 <Route index element={<User/>}/>
                             </Route>

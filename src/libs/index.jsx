@@ -35,3 +35,27 @@ export async function login (authData) {
 
   return {token: jwt, user}
 }
+
+export async function regist (newUser) {
+  const response = await fetch('http://localhost:1337/api/auth/local/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "username": `${newUser.name} ${newUser.surname}`,
+      "email": newUser.email,
+      "password": newUser.password
+    })
+  })
+
+  const data = await response.json()
+
+  let err 
+  if (data.error) {
+    err = new Error(data.error.message)
+    throw err
+  }
+
+  return {token: data.jwt, user: data.user}
+}
