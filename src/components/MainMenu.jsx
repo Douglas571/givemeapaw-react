@@ -1,103 +1,172 @@
-import { css, keyframes } from '@emotion/react'
+import { css, keyframes, useTheme } from '@emotion/react'
 import { Link } from 'react-router-dom'
 
 import { AuthProvider, useAuth } from '@/hooks/Auth'
 
 import SideBarUserInfo from '@/components/SideBarUserInfo'
+import IconButton from '@/components/IconButton'
 
 const MainMenu = (props) => {
+  const theme = useTheme()
   const { show, onClose } = props
-  const { token, onLogout } = useAuth()
-
-  const apearKf = keyframes`
-    
-  `
+  const { token, user, onLogout } = useAuth()
 
   const MobilMenuCSS = css`
     position: fixed;
-    top: 0;
-    left: -100%;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
 
-    width: 100%;
-    height: 100%;
-    background-color: hsl(0, 0%, 0%, 0);
+    left: -100vh;
 
-    font-size: 2rem;
+    background-color: ${theme.colors.white};
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
 
-    transition: all .2s ease;
+    li {
+      list-style: none;
+    }
 
     &.show {
       left: 0;
-      background-color: hsl(0, 0%, 0%, .8);
     }
 
-    .background {
-
-      width: 100%;
-      height: 100vh;
-      opacity: 0;
-      background: black;
-
+    #navbar-close-button {
+      display: flex;
+      justify-content: end;
     }
 
-    .menu-surface {
-      width: 88%;
-      height: 100vh;
-      background: white;
+    #user-indicator {
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.5rem;
+
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      border-bottom: 1px solid ${theme.colors.divisor};
+
+      .avatar {
+        width: 65px;
+        border-radius: 100%;
+      }
+
+      .username {
+        font-size: 2.5rem;
+        font-weight: bold;
+
+        color: ${theme.colors.gray};
+      }
     }
 
-    .option-list {
-      padding-top: 2rem;
+    #navbar-menu {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      height: 100%;
     }
 
-    li {
-      padding: 1rem 2rem;
+    #navbar-main, 
+    #navbar-footer{
+      margin: 2rem;
+
+      font-size: 2rem;
+      font-weight: bold;
+      color: ${theme.colors.gray}
+    }
+
+    #navbar-menu {
+      ul {
+        padding-left: 1rem;
+      }
+
+      li {
+        margin-bottom: .5rem;
+      }
+    }
+
+    #navbar-main {
+
+      section {
+        margin-bottom: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        color: ${theme.colors.divisor};
+        margin-bottom: .5rem;
+      }
+    }
+
+    #navbar-footer {
+
     }
   `
   const toggleMenu = (evt) => {
     const el = evt.target
     const className = el.getAttribute('class')?.split(' ')
+    console.log('close')
 
     if (className?.includes('menu') || el.localName === 'a') {
+      console.log('should close')
       onClose()  
     }
     console.log({className})
     
   }
 
-
-  /* I don't know if add a close button...
-   * <button onClick={toggleMenu} class>X</button>
-   *
-   * TO-DO: Make a better animation, background fadeIn and
-   *        menu-surface move right.
-   */
-
   const showClass = show ? ' show' : ''
   return (
     
-    <div className={'menu' + showClass} 
+    <div 
+      className={'menu' + showClass} 
       css={MobilMenuCSS}
-      onClick={toggleMenu}>
-      <div className="menu-surface">
-        { token && <SideBarUserInfo/> }
-        <ul className="option-list">
-
-          <li><Link to="/">Inicio</Link></li>
-          <li><Link to="/campaigns">Campañas</Link></li>
-
-          { token && <li><Link onClick={onLogout}>Cerrar Sesión</Link></li> }
-
-          { !token && (
-            <>
-              <li><Link to="/login">Iniciar Sesión</Link></li>
-              <li><Link to="/regist">Registrarce</Link></li>
-            </>
-          )}
-
-        </ul>
+      onClick={toggleMenu}
+    >
+      <div id="navbar-close-button">
+        <IconButton 
+          be="close"
+          className='menu'
+          onClick={toggleMenu}/>
       </div>
+      <div id="user-indicator">
+        <img src="profile.jpg" className="avatar"/>
+        <div className="username">{user.username}</div>
+      </div>
+      <div id="navbar-menu">
+        <div id="navbar-main">
+            
+          <section>
+            <h1>Navegación</h1>
+            <ul>
+              <li>Inicio</li>
+              <li>Campañas</li>
+            </ul>
+          </section>
 
+          
+          <section>
+          <h1>Administración</h1>
+            <ul>
+              <li>Donaciones</li>
+              <li>Campañas</li>
+              <li>Métodos de pago</li>
+              <li>Perfil</li>
+            </ul>
+          </section>
+
+        </div>
+        <div id="navbar-footer">
+          <ul>
+            <li>Configuración</li>
+            <li>Cerrar Sesión</li>
+          </ul>
+        </div>
+      </div>
     </div>
   )
 }
