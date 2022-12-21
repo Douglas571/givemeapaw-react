@@ -31,10 +31,6 @@ function App() {
             <AuthProvider>
                 <div className='App' css={CSS}>
                     <BrowserRouter>
-                    <div>
-                        <Link to='/'>Home</Link>
-                        <Link to='/login'>Login</Link>
-                    </div>
                         <Routes>
                             <Route path="/" element={<Home/>}/>
                             <Route path="/login" element={<Login/>}/>

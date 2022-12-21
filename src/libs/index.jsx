@@ -2,14 +2,14 @@ export * as api from './api'
 
 import * as fakeServer from './fake-server.js'
 
+const HOST = 'http://localhost:1337'
+
 export async function login (authData) {
   //const theUser = fakeServer.data.users.find( u => u.email === user?.email )
 
   console.log({authData})
 
-  const requestURL = 'http://localhost:1337/api/auth/local';
-
-  const response = await fetch(requestURL, {
+  const response = await fetch(`${HOST}/api/auth/local`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ export async function login (authData) {
 }
 
 export async function regist (newUser) {
-  const response = await fetch('http://localhost:1337/api/auth/local/register', {
+  const response = await fetch(`${HOST}/api/auth/local/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -50,6 +50,7 @@ export async function regist (newUser) {
   })
 
   const data = await response.json()
+  console.log({data})
 
   let err 
   if (data.error) {

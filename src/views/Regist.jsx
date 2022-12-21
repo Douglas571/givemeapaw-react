@@ -2,6 +2,8 @@ import { css } from '@emotion/react'
 
 import { useNavigate, Link } from 'react-router-dom'
 
+import { useAuth } from '@/hooks/Auth'
+
 import Box from '@/layout/Box'
 import DeadEndLayout from '@/layout/DeadEndLayout'
 
@@ -52,7 +54,10 @@ const CSS = css`
 `
 
 const Regist = () => {
-  const handleSubmit = (e) => {
+  const { onRegist } = useAuth()
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('registrando')
 
@@ -66,6 +71,13 @@ const Regist = () => {
     }
 
     console.log({newUser})
+
+    try {
+      await onRegist(newUser)
+      navigate('/me')
+    } catch(err) {
+
+    }
   }
 
   

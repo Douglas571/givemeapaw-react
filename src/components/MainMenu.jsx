@@ -40,7 +40,6 @@ const MainMenu = (props) => {
 
     }
 
-
     .menu-surface {
       width: 88%;
       height: 100vh;
@@ -80,7 +79,6 @@ const MainMenu = (props) => {
     <div className={'menu' + showClass} 
       css={MobilMenuCSS}
       onClick={toggleMenu}>
-
       <div className="menu-surface">
         { token && <SideBarUserInfo/> }
         <ul className="option-list">

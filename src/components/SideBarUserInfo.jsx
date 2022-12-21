@@ -30,7 +30,7 @@ const SideBarUserInfo = (props) => {
   return (
     <div css={CSS}>
       <div className="avatar"></div>
-      <Link to="/me">{ user.name + ' ' + user.lastName }</Link>
+      <Link to="/me">{ user.username }</Link>
     </div>
   )
 }
