@@ -138,15 +138,22 @@ const MainMenu = (props) => {
           className='menu'
           onClick={toggleMenu}/>
       </div>
-      <div id="user-indicator">
-        <img src="profile.jpg" className="avatar"/>
-        <div className="username">{user.username}</div>
-      </div>
+      { token && (
+        <Link to="/me"
+          onClick={toggleMenu}
+        >
+          <div id="user-indicator">
+            <img src="profile.jpg" className="avatar"/>
+            <div className="username">{user.username}</div>
+          </div>
+        </Link>
+      )}
+      
       <div id="navbar-menu">
         <div id="navbar-main">
             
           <section>
-            <h1>Navegación</h1>
+            { token && (<h1>Navegación</h1>)}
             <ul>
               <li><Link to="/">Inicio</Link></li>
               <li><Link to="/campaigns">Campañas</Link></li>

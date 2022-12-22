@@ -1,11 +1,14 @@
+import { useState } from 'react'
 import { css, useTheme } from '@emotion/react'
 
 
+// Components
+import MainMenu from '@/components/MainMenu'
 import IconButton from '@/components/IconButton.jsx'
 
 function NavBar(props) {
-    const { onMenuClick } = props
     const theme = useTheme()
+    const [showMenu, setShowMenu] = useState(false)
 
     const menuCSS = css`
 
@@ -36,14 +39,21 @@ function NavBar(props) {
         }
     `
 
+    const toggleMenu = () => {
+        setShowMenu(!showMenu)
+    }    
+
     return (
-        <div css={menuCSS}>
-            <h1>Give Me A Paw</h1>
-            <IconButton 
-                be="menu"
-                color={theme.colors.primary}
-                onClick={onMenuClick}/>
-        </div>
+        <>
+            <MainMenu show={showMenu} onClose={toggleMenu}/>
+            <div css={menuCSS}>
+                <h1>Give Me A Paw</h1>
+                <IconButton 
+                    be="menu"
+                    color={theme.colors.primary}
+                    onClick={toggleMenu}/>
+            </div>
+        </>
     )
 }
 
