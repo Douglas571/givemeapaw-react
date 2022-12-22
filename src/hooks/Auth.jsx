@@ -26,6 +26,7 @@ export const AuthProvider = (props) => {
 
   const handleLogout = () => {
     setToken('')
+    setUser({})
   }
 
   const handleRegist = async (newUser) => {

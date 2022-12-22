@@ -119,6 +119,11 @@ const MainMenu = (props) => {
     
   }
 
+  const handleLogout = () => {
+    console.log('logout')
+    onLogout()
+  }
+
   const showClass = show ? ' show' : ''
   return (
     
@@ -143,27 +148,42 @@ const MainMenu = (props) => {
           <section>
             <h1>Navegación</h1>
             <ul>
-              <li>Inicio</li>
-              <li>Campañas</li>
+              <li><Link to="/">Inicio</Link></li>
+              <li><Link to="/campaigns">Campañas</Link></li>
             </ul>
           </section>
 
-          
-          <section>
-          <h1>Administración</h1>
-            <ul>
-              <li>Donaciones</li>
-              <li>Campañas</li>
-              <li>Métodos de pago</li>
-              <li>Perfil</li>
-            </ul>
-          </section>
+          { token && (
+              <section>
+                <h1>Administración</h1>
+                <ul>
+                  <li>Donaciones</li>
+                  <li>Campañas</li>
+                  <li>Métodos de pago</li>
+                  <li>Perfil</li>
+                </ul>
+              </section>
+            )
+          }
 
         </div>
         <div id="navbar-footer">
           <ul>
-            <li>Configuración</li>
-            <li>Cerrar Sesión</li>
+            { token
+              ? (
+                <>
+                  <li>
+                    <Link to="/admin/config">Configuración</Link>
+                  </li>
+                  <li>
+                    <Link to="#" onClick={handleLogout}>Cerrar Sesión</Link>
+                  </li>
+                </>
+              )
+              : (
+                <li><Link to="/login">Iniciar Sesión</Link></li>
+              )
+            }
           </ul>
         </div>
       </div>
