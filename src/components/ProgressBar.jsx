@@ -4,13 +4,11 @@ const CSS = css`
   height: .6rem;
 
   margin-bottom: 1rem;
-  background-color: var(--white);
 
   border-radius: 30px;
   overflow: hidden;    
 
   div {
-    background-color: var(--primary-color);
     height: 100%;
     width: 0%;
 
@@ -18,13 +16,15 @@ const CSS = css`
   }
 
 `
-
+/*
+  this take 1 argument, the current progress in percent
+*/
 const ProgressBar = (props) => {
   const { percent } = props
 
   return (
-    <div className="progress-bar" css={CSS}>
-      <div style={{width: `${percent}%`}}></div>
+    <div className="progress-bar bg-divisor" css={CSS}>
+      <div className='bg-primary' style={{width: `${percent}%`}}></div>
     </div>
   )
 }

@@ -7,14 +7,14 @@ const CSS = css`
   min-height: 100vh;
 `
 
-const Home = (props) => {
+const Home = () => {
     const theme = useTheme()
 
     return (
         <>
             <NavBar/>
-            <div css={CSS}>
-                <h1>Home</h1>   
+            <div css={CSS}>                
+                <h1>Home</h1>
             </div>
         </>
     )

@@ -17,7 +17,7 @@ const MainMenu = (props) => {
     height: 100vh;
     z-index: 1000;
 
-    left: -100vh;
+    left: -1000vh;
 
     background-color: ${theme.colors.white};
     padding: 2rem;
