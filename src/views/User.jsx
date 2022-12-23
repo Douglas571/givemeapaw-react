@@ -12,6 +12,8 @@ import { api as API } from '@/libs'
 import NavBar from '@/components/NavBar'
 import ProgressBar from '../components/ProgressBar'
 
+import DashboardCampaignShorcut from '../components/DashboardCampaignShorcut'
+
 
 const APP_TITLE = "Danos Una Pata"
 
@@ -106,10 +108,6 @@ const User = () => {
       }
     }
 
-    .campaign-item {
-      
-    }
-
     .link {
       color: ${theme.colors.primary};
       text-decoration: underline;
@@ -121,6 +119,8 @@ const User = () => {
     <div css={CSS}>
       <NavBar/>
       <div className='p-5'>
+
+        {/* Greeting box */}
         <Box>
           <div className='flex justify-center align-center'>
             <h1>Bienvenido {user.username}</h1>
@@ -128,6 +128,32 @@ const User = () => {
           </div>
         </Box>
 
+        <Box className="info box">
+          <p>En {APP_TITLE} nos aseguramos de que quienes soliciten 
+          ayuda sean personas honestas, con intenciones reales
+          de ayudar a estos adorables seres que día a día sufren
+          en las calles. Si deceas ser parte de esta gran familia te pedimos
+          amablemente que hables con nosotros antes de solicitar ayuda.</p>
+          <button>Solicitar Rol de Voluntario</button>
+        </Box>
+
+        {/* Campaigns Shorcut List */}
+        <Box className='box'>
+          <div className='mb-5'>
+            <h1>Campañas</h1>
+          </div>
+          <div>
+            
+            { campaigns.map( c => (
+                <DashboardCampaignShorcut campaign={c} /> 
+            ))}
+          </div>
+          <div className='text-center'>
+            <Link to='/me/campaigns' className='text-primary underline'>Administrar Campañas</Link>
+          </div>
+        </Box>
+
+        {/* Donations Shorcut List */}
         <Box>
           <h1>Donaciones Pendientes</h1>
           <div>
@@ -142,41 +168,6 @@ const User = () => {
           </div>
           <div className='text-center mt-5'>
             <Link to='/me/donations' className='text-primary underline'>Ver Más</Link>
-          </div>
-        </Box>
-
-        <Box className="info box">
-          <p>En {APP_TITLE} nos aseguramos de que quienes soliciten 
-          ayuda sean personas honestas, con intenciones reales
-          de ayudar a estos adorables seres que día a día sufren
-          en las calles. Si deceas ser parte de esta gran familia te pedimos
-          amablemente que hables con nosotros antes de solicitar ayuda.</p>
-          <button>Solicitar Rol de Voluntario</button>
-        </Box>
-
-        <Box className='box'>
-          <div className='mb-5'>
-            <h1>Campañas</h1>
-          </div>
-          <div>
-            { campaigns.map( c => (
-                <div className="campaign-item flex gap-4 border-solid border-divisor border-[1px] rounded-md p-5 mb-5
-                  hover:shadow-lg">
-                  <img className='bg-black w-20 h-20 rounded-full' /> 
-                  <div className='grow'>
-                    <h3 className="title text-[2rem] leading-[1.5rem]" key={c.id}>{c.title}</h3>
-                    <div className='flex justify-between'>
-                      <p className='text-4xl font-black text-primary'>{c.raised}$</p>
-                      <p className='text-4xl font-black text-divisor'>{c.goal}$</p>
-                    </div>
-
-                    <ProgressBar percent={50}/>
-                  </div>
-                </div>
-              ))}
-          </div>
-          <div className='text-center'>
-            <Link to='/me/campaigns' className='text-primary underline'>Administrar Campañas</Link>
           </div>
         </Box>
 

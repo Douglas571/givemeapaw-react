@@ -20,6 +20,8 @@ import Login from '@/views/Login'
 import Regist from '@/views/Regist'
 import User from '@/views/User'
 
+import CampaignsAdmin from './views/CampaignsAdmin'
+
 
 function App() {
     const CSS = css`
@@ -35,8 +37,9 @@ function App() {
                             <Route path="/" element={<Home/>}/>
                             <Route path="/login" element={<Login/>}/>
                             <Route path="/regist" element={<Regist/>}/>
-                            <Route path="me" element={<ProtectedRoute/>}>
+                            <Route path="/me" element={<ProtectedRoute/>}>
                                 <Route index element={<User/>}/>
+                                <Route path='/me/campaigns' element={<CampaignsAdmin />}/>
                             </Route>
                         </Routes>
                     </BrowserRouter>

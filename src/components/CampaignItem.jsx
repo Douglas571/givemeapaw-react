@@ -33,6 +33,7 @@ const CSS = css`
 
 `
 
+// ! DELETE THIS
 const CampaignItem = (props) => {
   const { campaign } = props
   const c = campaign
