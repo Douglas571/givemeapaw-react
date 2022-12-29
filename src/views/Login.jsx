@@ -7,7 +7,13 @@ import { useAuth } from '@/hooks/Auth'
 
 import DeadEndLayout from '@/layout/DeadEndLayout'
 
+import NavBarEndMenu from '@/components/NavBarEndMenu'
+import Footer from '@/components/Footer'
+
 import Icon from '@/components/Icon'
+
+import Box from '@/components/Box'
+import Title from '@/components/Title'
 
 import Button from '@/components/Button'
 import TextField from '@/components/TextField'
@@ -105,23 +111,17 @@ const Login = () => {
         color: black;
       }
     }
-
-    @media (min-width: 700px) {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-
-      & .hero {
-        height: 100%;
-      }
-    }
   `
 
   return (
-      <DeadEndLayout>
-        <div css={styles}>
-          <div className="hero"></div>
-          <div className="container">
-            <h1 className="title">Iniciar Seción</h1>
+      <div className='bg-background min-h-screen'>
+        <NavBarEndMenu />
+        <div css={styles} className='p-5 flex justify-center'>
+         
+          <Box className="">
+            <div className='mb-10 py-[6rem] border-b-[1px] text-center'>
+              <Title>Inicio de Sesión</Title>
+            </div>
 
             <form onSubmit={handleLogin}>
               <TextField
@@ -139,16 +139,18 @@ const Login = () => {
               { errorMsg && <div className="err-msg"><p>{errorMsg}</p></div> }
 
               <div className="login-button">
-                <Button>Entrar</Button>
+                <Button>Inicias Sesión</Button>
               </div>
             </form>
 
-            <p>¿Has olvidado tu contraseña? <Link className="link" to="/recover-password">Recuperar Contraseña</Link></p>
-            <p>¿No tienes cuenta? <Link className="link" to="/regist">Registrate</Link></p>
+            <p>¿Has olvidado tu contraseña? <Link className="text-primary underline" to="/recover-password">Recuperar Contraseña</Link></p>
+            <p>¿No tienes cuenta? <Link className="text-primary underline" to="/regist">Registrate</Link></p>
             
-          </div>
+          </Box>
+
         </div>
-      </DeadEndLayout>
+        <Footer />
+      </div>
     )
 }
 

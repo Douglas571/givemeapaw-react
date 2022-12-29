@@ -20,7 +20,9 @@ import Login from '@/views/Login'
 import Regist from '@/views/Regist'
 import User from '@/views/User'
 
-import CampaignsAdmin from './views/CampaignsAdmin'
+import Campaigns from '@/views/Campaigns'
+import CampaignsAdmin from '@/views/CampaignsAdmin'
+
 
 
 function App() {
@@ -41,6 +43,12 @@ function App() {
                                 <Route index element={<User/>}/>
                                 <Route path='/me/campaigns' element={<CampaignsAdmin />}/>
                             </Route>
+
+                            <Route path="/campaigns">
+                                <Route index element={<Campaigns />}/>
+                            </Route>
+
+
                         </Routes>
                     </BrowserRouter>
                 </div>

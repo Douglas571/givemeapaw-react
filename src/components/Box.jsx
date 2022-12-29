@@ -10,16 +10,7 @@ const Box = ({children}) => {
     border-radius: 5px;
     box-shadow:  0px 2px 4px 0px #7F646464;
 
-    h1 {
-      font-weight: bold;
-      font-size: 3.5rem; 
-      line-height: 3.5rem;
-      color: ${theme.colors.gray};
-    }
-
-    span {
-      font-size: 5rem;
-    }
+    
   `
 
   return (

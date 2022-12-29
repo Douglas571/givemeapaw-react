@@ -10,7 +10,7 @@ const NavBarEndMenu = () => {
     }
 
     return (
-        <div className='bg-white shadow-xl'>
+        <div className='bg-white shadow-xl py-2'>
             <IconButton 
                 className='text-primary'
                 be="arrow_back"

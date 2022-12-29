@@ -5,6 +5,7 @@ import NavBar from '@/components/NavBar'
 import Button from '@/components/Button'
 
 import Footer from '@/components/Footer'
+import { Link } from 'react-router-dom'
 
 const CSS = css`
   min-height: 100vh;
@@ -40,7 +41,9 @@ const Home = () => {
                     <h1 className='text-7xl text-primary font-extrabold'>Salvando Animales, Cambiando Vidas</h1>
                     <div className='grow relative'>
                         <div className='flex justify-center relative top-[60%]' >
-                            <button className='p-4 py-6 rounded-lg bg-primary text-white text-2xl'>Descubre campañas</button>
+                            <button className='p-4 py-6 rounded-lg bg-primary text-white text-2xl'>
+                                <Link to="/campaigns">Descubre campañas</Link>
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -3,31 +3,11 @@ import { css } from '@emotion/react'
 
 import useCampaigns from '@/hooks/useCampaigns'
 
+import NavBar from '@/components/NavBar'
+import Box from '@/components/Box'
 import CampaignItem from '@/components/CampaignItem'
 
 const CSS = css`
-  
-  height: 100%;
-  padding: 1rem;
-  background-color: var(--white);
-
-  & > .title {
-    font-size: 4rem;
-    margin-bottom: 2rem;
-  }
-
-  .campaigns-list {
-
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, auto));
-    gap: 2rem;
-  }
-
-  @media (min-width: 750px) {
-    & {
-      padding: 3rem calc(100vw - 90%);
-    }
-  }
 
 `
 
@@ -36,13 +16,23 @@ const Campaigns = () => {
   const [ campaigns, updateCampaigns ] = useCampaigns()
 
   return (
-    <div css={CSS} className={"campaigns"}>
-      <h1 className="title">Campañas</h1>
-      <div className="campaigns-list">
+    <div css={CSS} className="campaigns bg-slate-200">
+      <NavBar />
 
-        { campaigns.map( c => (
-            <CampaignItem campaign={c} key={c.id}/>
-        ))}    
+      <div className="p-5 h-screen">
+
+        <Box>
+
+          <h1>Descubrir Campañas</h1>
+          <input 
+            class='border-divisor border-[1px] rounded-[3px]'
+            type="text" placeholder='Busqueda'/>
+
+          <h3>Populares</h3>
+
+          <h3>Nuevos</h3>
+
+        </Box>
 
       </div>
     </div>

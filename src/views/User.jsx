@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { css, useTheme } from '@emotion/react'
 
 import useLocalStorage from '@/hooks/useLocalStorage'
@@ -11,41 +11,15 @@ import { api as API } from '@/libs'
 
 import NavBar from '@/components/NavBar'
 import ProgressBar from '../components/ProgressBar'
+import Link from '@/components/Link'
+import Box from '@/components/Box'
+import Title from '@/components/Title'
 
 import DashboardCampaignShorcut from '../components/DashboardCampaignShorcut'
 
 
 const APP_TITLE = "Danos Una Pata"
 
-const Box = ({children}) => {
-  const theme = useTheme()
-  const CSS = css`
-    
-      padding: 1.5rem 2rem;
-
-      background-color: ${theme.colors.white};
-      border-radius: 5px;
-      box-shadow:  0px 2px 4px 0px #7F646464;
-
-      h1 {
-        font-weight: bold;
-        font-size: 3.5rem; 
-        line-height: 3.5rem;
-        color: ${theme.colors.gray};
-      }
-
-      span {
-        font-size: 5rem;
-      }
-    
-  `
-
-  return (
-    <div css={CSS} 
-      className='
-        mb-5'
-    >{children}</div>)
-}
 
 const User = () => {
   const { user } = useAuth()
@@ -102,9 +76,7 @@ const User = () => {
       }
 
       .price {
-        color: ${theme.colors.primary};
-        font-weight: bold;
-        font-size: 3.5rem;
+        
       }
     }
 
@@ -123,8 +95,8 @@ const User = () => {
         {/* Greeting box */}
         <Box>
           <div className='flex justify-center align-center'>
-            <h1>Bienvenido {user.username}</h1>
-            <span>👋</span>
+            <Title>Bienvenido {user.username}</Title>
+            <span className='text-7xl'>👋</span>
           </div>
         </Box>
 
@@ -140,7 +112,7 @@ const User = () => {
         {/* Campaigns Shorcut List */}
         <Box className='box'>
           <div className='mb-5'>
-            <h1>Campañas</h1>
+            <Title>Campañas</Title>
           </div>
           <div>
             
@@ -149,25 +121,25 @@ const User = () => {
             ))}
           </div>
           <div className='text-center'>
-            <Link to='/me/campaigns' className='text-primary underline'>Administrar Campañas</Link>
+            <Link to='/me/campaigns'>Administrar Campañas</Link>
           </div>
         </Box>
 
         {/* Donations Shorcut List */}
         <Box>
-          <h1>Donaciones Pendientes</h1>
+          <Title>Donaciones Pendientes</Title>
           <div>
             <div className='donation-item bordered-box hover:shadow-lg'>
               <img className='avatar'/>
               <div>
                 <h3 className='title'>Juán Gabriel</h3>
                 <p>para: Goldens</p>
-                <h6 className='price'>100,00$</h6>
+                <h6 className='text-primary font-bold text-5xl'>100,00$</h6>
               </div>
             </div>
           </div>
           <div className='text-center mt-5'>
-            <Link to='/me/donations' className='text-primary underline'>Ver Más</Link>
+            <Link to='/me/donations'>Ver Más</Link>
           </div>
         </Box>
 
