@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { css, useTheme } from '@emotion/react'
 
-
 // Components
 import MainMenu from '@/components/MainMenu'
 import IconButton from '@/components/IconButton.jsx'

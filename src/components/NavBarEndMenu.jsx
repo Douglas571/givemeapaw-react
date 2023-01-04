@@ -1,23 +1,24 @@
-import IconButton from '@/components/IconButton'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { useNavigate } from 'react-router'
+import IconButton from '@/components/IconButton';
 
-const NavBarEndMenu = () => {
-    const navegation = useNavigate()
+function NavBarEndMenu() {
+  const navegation = useNavigate();
 
-    const goBack = () => {
-        navegation('..')
-    }
+  const goBack = () => {
+    navegation('..');
+  };
 
-    return (
-        <div className='bg-white shadow-xl py-2'>
-            <IconButton 
-                className='text-primary'
-                be="arrow_back"
-                onClick={goBack}
-            />
-        </div>
-    )
+  return (
+    <div className="bg-white shadow-xl py-2">
+      <IconButton
+        className="text-primary"
+        be="arrow_back"
+        onClick={goBack}
+      />
+    </div>
+  );
 }
 
-export default NavBarEndMenu 
+export default NavBarEndMenu;

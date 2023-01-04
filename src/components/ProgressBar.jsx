@@ -1,4 +1,5 @@
-import { css } from '@emotion/react'
+import React from 'react';
+import { css } from '@emotion/react';
 
 const CSS = css`
   height: .6rem;
@@ -14,13 +15,12 @@ const CSS = css`
 
     transition: all .5s ease .5s;
   }
-
-`
+`;
 /*
   this take 1 argument, the current progress in percent
 */
-const ProgressBar = (props) => {
-  const { percent } = props
+function ProgressBar(props) {
+  const { percent } = props;
 
   return (
     <div className="progress-bar bg-divisor" css={CSS}>

@@ -41,7 +41,7 @@ const Login = () => {
       await onLogin(userData)
       navigate('/me')
     } catch (err) {
-      console.log(err.type)
+      console.log({type: err.type})
 
       if (err.type == 'email') {
         setErrorMsg('El correo no está registrado')
