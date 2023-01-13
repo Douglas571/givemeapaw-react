@@ -9,7 +9,7 @@ import {
     Navigate
 } from 'react-router-dom'
 
-import { css, ThemeProvider, useTheme } from '@emotion/react'
+import { css } from '@emotion/react'
 
 import { AuthProvider, useAuth } from '@/hooks/Auth'
 
@@ -24,14 +24,18 @@ import Campaigns from '@/views/Campaigns'
 import CampaignsAdmin from '@/views/CampaignsAdmin'
 
 
+import { ThemeProvider, useTheme, createTheme, alpha } from '@mui/material/styles';
 
 function App() {
+    
+    const theTheme = createTheme(Theme);
+
     const CSS = css`
         background: ${Theme.colors.background};
     `
 
     return (
-        <ThemeProvider theme={Theme}>
+        <ThemeProvider theme={theTheme}>
             <AuthProvider>
                 <div className='App' css={CSS}>
                     <BrowserRouter>

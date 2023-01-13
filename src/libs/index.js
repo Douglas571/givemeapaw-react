@@ -5,11 +5,12 @@ const HOST = 'http://localhost:1337';
 export async function login(authData) {
   // const theUser = fakeServer.data.users.find( u => u.email === user?.email )
 
-  // console.log({authData})
+  console.log({ authData });
 
-  const response = await fetch(`${HOST}/api/auth/local`, {
+  const response = await fetch(`http://localhost:1337/api/auth/local`, {
     method: 'POST',
     headers: {
+      Connection: 'keep-alive',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
@@ -18,7 +19,7 @@ export async function login(authData) {
     }),
   });
 
-  // console.log({response})
+  console.log({ response });
   const data = await response.json();
   // console.log({data})
 

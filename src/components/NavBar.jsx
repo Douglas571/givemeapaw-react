@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { css, useTheme } from '@emotion/react'
+import React from 'react';
+import { useState } from 'react';
+import { css, useTheme } from '@emotion/react';
 
 // Components
 import MainMenu from '@/components/MainMenu'
@@ -40,20 +41,21 @@ function NavBar(props) {
 
     const toggleMenu = () => {
         setShowMenu(!showMenu)
-    }    
+    }
 
-    return (
-        <>
-            <MainMenu show={showMenu} onClose={toggleMenu}/>
-            <div css={menuCSS}>
-                <h1>Give Me A Paw</h1>
-                <IconButton 
-                    be="menu"
-                    color={theme.colors.primary}
-                    onClick={toggleMenu}/>
-            </div>
-        </>
-    )
+  return (
+    <>
+      <MainMenu show={showMenu} onClose={toggleMenu}/>
+      <div css={menuCSS}>
+        <h1>Give Me A Paw</h1>
+        <IconButton 
+          data-test='navbar-show-menu'
+          be="menu"
+          color={theme.colors.primary}
+          onClick={toggleMenu}/>
+      </div>
+    </>
+  )
 }
 
-export default NavBar
+export default NavBar;

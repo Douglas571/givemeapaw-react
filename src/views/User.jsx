@@ -9,7 +9,8 @@ import { useAuth } from '@/hooks/Auth'
 
 import { api as API } from '@/libs'
 
-import NavBar from '@/components/NavBar'
+
+import AppBar from '@/components/AppBar';
 import ProgressBar from '../components/ProgressBar'
 import Link from '@/components/Link'
 import Box from '@/components/Box'
@@ -89,7 +90,7 @@ const User = () => {
   `
   return (
     <div css={CSS}>
-      <NavBar/>
+      <AppBar/>
       <div className='p-5'>
 
         {/* Greeting box */}

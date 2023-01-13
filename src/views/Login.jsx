@@ -1,58 +1,71 @@
-import { useState } from 'react'
-import { css } from '@emotion/react'
+/* eslint-disable import/no-unresolved */
+import React, { useState } from 'react';
+import { css } from '@emotion/react';
 
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom';
 
-import { useAuth } from '@/hooks/Auth'
+import { useAuth } from '@/hooks/Auth';
 
-import DeadEndLayout from '@/layout/DeadEndLayout'
+// import DeadEndLayout from '@/layout/DeadEndLayout';
 
-import NavBarEndMenu from '@/components/NavBarEndMenu'
-import Footer from '@/components/Footer'
+import NavBarEndMenu from '@/components/NavBarEndMenu';
+import Footer from '@/components/Footer';
 
-import Icon from '@/components/Icon'
+import Icon from '@/components/Icon';
 
-import Box from '@/components/Box'
-import Title from '@/components/Title'
+import Box from '@/components/Box';
+import Title from '@/components/Title';
 
-import Button from '@/components/Button'
-import TextField from '@/components/TextField'
+import Button from '@/components/Button';
+import TextField from '@/components/TextField';
 
-const Login = () => {
-  const {token, onLogin} = useAuth()
-  const [errorMsg, setErrorMsg] = useState('')
+function Login() {
+  const { onLogin } = useAuth();
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   async function handleLogin(evt) {
-    evt.preventDefault()
-    console.log('login')
-      
-    const form = evt.target
+    evt.preventDefault();
+    // console.log('login');
 
-    const { email, password }  = evt.target.elements
-    
+    // const form = evt.target
+
+    const { email, password } = evt.target.elements;
+
     const userData = {
       email: email.value,
-      password: password.value
-    }
+      password: password.value,
+    };
 
-    try {
-      await onLogin(userData)
-      navigate('/me')
-    } catch (err) {
-      console.log({type: err.type})
+    console.log('before login');
+    await onLogin(userData);
+    console.log('pass login');
+    navigate('/me');
 
-      if (err.type == 'email') {
-        setErrorMsg('El correo no está registrado')
-      }
+    // try {
+    //   console.log('before login');
+    //   await onLogin(userData);
+    //   console.log('pass login');
+    //   navigate('/me');
+    // } catch (err) {
+    //   // ! the test in cypress y launching me a "failed to fetch" error
 
-      if (err.type == 'password') {
-        setErrorMsg('La contraseña es incorrecta')
-      }
+    //   console.log({ err });
+    //   console.log({ type: err.type });
 
-    }
-    
+    //   if (err.type === 'ValidationError') {
+    //     setErrorMsg('Correo o Contraseña invalidos');
+    //   }
+
+    //   if (err.type === 'email') {
+    //     setErrorMsg('El correo no está registrado');
+    //   }
+
+    //   if (err.type === 'password') {
+    //     setErrorMsg('La contraseña es incorrecta');
+    //   }
+    // }
   }
 
   const styles = css`
@@ -111,47 +124,51 @@ const Login = () => {
         color: black;
       }
     }
-  `
+  `;
 
   return (
-      <div className='bg-background min-h-screen'>
-        <NavBarEndMenu />
-        <div css={styles} className='p-5 flex justify-center'>
-         
-          <Box className="">
-            <div className='mb-10 py-[6rem] border-b-[1px] text-center'>
-              <Title>Inicio de Sesión</Title>
+    <div className="bg-background min-h-screen">
+      <NavBarEndMenu />
+      <div css={styles} className="p-5 flex justify-center">
+        <Box className="">
+          <div className="mb-10 py-[6rem] border-b-[1px] text-center">
+            <Title>Inicio de Sesión</Title>
+          </div>
+
+          <form onSubmit={handleLogin} data-test="login-form">
+            <TextField
+              name="email"
+              placeholder="Correo"
+              icon={<Icon be="email" />}
+            />
+
+            <TextField
+              name="password"
+              placeholder="Contraseña"
+              icon={<Icon be="key" />}
+            />
+
+            { errorMsg && <div className="err-msg"><p>{errorMsg}</p></div> }
+
+            <div className="login-button">
+              <Button>Iniciar Sesión</Button>
             </div>
+          </form>
 
-            <form onSubmit={handleLogin}>
-              <TextField
-                name='email'
-                placeholder="Correo"
-                icon={<Icon be="email"/>}
-              />
+          <p>
+            ¿Has olvidado tu contraseña?
+            <Link className="text-primary underline" to="/recover-password"> Recuperar Contraseña</Link>
+          </p>
+          <p>
+            ¿No tienes cuenta?
+            <Link className="text-primary underline" to="/regist"> Registrate</Link>
+          </p>
+        </Box>
 
-              <TextField
-                name='password'
-                placeholder="Contraseña"
-                icon={<Icon be="key"/>}
-              />
-
-              { errorMsg && <div className="err-msg"><p>{errorMsg}</p></div> }
-
-              <div className="login-button">
-                <Button>Inicias Sesión</Button>
-              </div>
-            </form>
-
-            <p>¿Has olvidado tu contraseña? <Link className="text-primary underline" to="/recover-password">Recuperar Contraseña</Link></p>
-            <p>¿No tienes cuenta? <Link className="text-primary underline" to="/regist">Registrate</Link></p>
-            
-          </Box>
-
-        </div>
-        <Footer />
       </div>
-    )
+      <Footer />
+    </div>
+  );
 }
 
-export default Login
+export default Login;
