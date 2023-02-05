@@ -17,6 +17,7 @@ import Box from '@/components/Box'
 import Title from '@/components/Title'
 
 import DashboardCampaignShorcut from '../components/DashboardCampaignShorcut'
+import { Button, Typography } from '@mui/material'
 
 
 const APP_TITLE = "Danos Una Pata"
@@ -96,24 +97,24 @@ const User = () => {
         {/* Greeting box */}
         <Box>
           <div className='flex justify-center align-center'>
-            <Title>Bienvenido {user.username}</Title>
+            <Typography variant='h5'>Bienvenido {user.username}</Typography>
             <span className='text-7xl'>👋</span>
           </div>
         </Box>
 
         <Box className="info box">
-          <p>En {APP_TITLE} nos aseguramos de que quienes soliciten 
+          <Typography variant='body1'>En {APP_TITLE} nos aseguramos de que quienes soliciten 
           ayuda sean personas honestas, con intenciones reales
           de ayudar a estos adorables seres que día a día sufren
           en las calles. Si deceas ser parte de esta gran familia te pedimos
-          amablemente que hables con nosotros antes de solicitar ayuda.</p>
-          <button>Solicitar Rol de Voluntario</button>
+          amablemente que hables con nosotros antes de solicitar ayuda.</Typography>
+          <Button>Solicitar Rol de Voluntario</Button>
         </Box>
 
         {/* Campaigns Shorcut List */}
         <Box className='box'>
           <div className='mb-5'>
-            <Title>Campañas</Title>
+            <Typography variant='h5'>Campañas</Typography>
           </div>
           <div>
             

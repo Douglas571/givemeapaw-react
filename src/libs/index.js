@@ -7,7 +7,7 @@ export async function login(authData) {
 
   console.log({ authData });
 
-  const response = await fetch(`http://localhost:1337/api/auth/local`, {
+  const response = await fetch('http://localhost:1337/api/auth/local', {
     method: 'POST',
     headers: {
       Connection: 'keep-alive',

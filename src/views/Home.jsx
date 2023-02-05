@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 
 import { Link } from 'react-router-dom';
 
-import NavBar from '@/components/NavBar';
 import AppBar from '@/components/AppBar';
 // import Button from '@/components/Button'
 
@@ -39,8 +38,6 @@ function Home() {
 
   return (
     <>
-      {/* <NavBar /> */}
-
       <AppBar />
 
       <div css={CSS}>

@@ -5,8 +5,17 @@ import { AuthProvider, useAuth } from '@/hooks/Auth'
 
 import SideBarUserInfo from '@/components/SideBarUserInfo'
 import IconButton from '@/components/IconButton'
+import { 
+  Avatar,
+  Box,
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton
+} from '@mui/material'
 
-const MainMenu = (props) => {
+function MainMenu(props) {
   const theme = useTheme()
   const { show, onClose } = props
   const { token, user, onLogout } = useAuth()
@@ -127,48 +136,82 @@ const MainMenu = (props) => {
   const showClass = show ? ' show' : ''
   return (
     
-    <div 
-      className={'menu' + showClass} 
-      css={MobilMenuCSS}
-      onClick={toggleMenu}
+    <Drawer 
+      className={'menu' + showClass}
+      // css={MobilMenuCSS}
+      open={show}
+      onClose={onClose}
     >
-      <div id="navbar-close-button">
-        <IconButton 
-          be="close"
-          className='menu'
-          onClick={toggleMenu}/>
-      </div>
       { token && (
         <Link to="/me"
           onClick={toggleMenu}
         >
-          <div id="user-indicator">
-            <img src="profile.jpg" className="avatar"/>
+          <Box 
+            id="user-indicator"
+            sx={{ 
+              display: 'flex',
+              alignItems: 'center',
+              margin: '1rem'
+            }}
+          >
+            <Avatar alt="Remy Sharp" src="profile.jpg" />
             <div className="username">{user.username}</div>
-          </div>
+          </Box>
         </Link>
       )}
       
-      <div id="navbar-menu">
+      <Box id="navbar-menu">
         <div id="navbar-main">
-            
+
+          <Divider />
           <section>
-            { token && (<h1>Navegación</h1>)}
-            <ul>
-              <li><Link to="/">Inicio</Link></li>
-              <li><Link to="/campaigns">Campañas</Link></li>
-            </ul>
+
+            <List>
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <Link to="/">Inicio</Link>
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem disablePadding>
+                <ListItemButton>
+                <Link to="/campaigns">Campañas</Link>
+                </ListItemButton>
+              </ListItem>
+
+            </List>
           </section>
+
+          <Divider />
 
           { token && (
               <section>
-                <h1>Administración</h1>
-                <ul>
-                  <li>Donaciones</li>
-                  <li>Campañas</li>
-                  <li>Métodos de pago</li>
-                  <li>Perfil</li>
-                </ul>
+                <List>
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      Donaciones
+                    </ListItemButton>
+                  </ListItem>
+
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      Campañas
+                    </ListItemButton>
+                  </ListItem>
+
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      Métodos de Pago
+                    </ListItemButton>
+                  </ListItem>
+
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      Perfil
+                    </ListItemButton>
+                  </ListItem>
+
+                </List>
               </section>
             )
           }
@@ -193,9 +236,9 @@ const MainMenu = (props) => {
             }
           </ul>
         </div>
-      </div>
-    </div>
-  )
+      </Box>
+    </Drawer>
+  );
 }
 
-export default MainMenu
+export default MainMenu;

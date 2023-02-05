@@ -1,24 +1,28 @@
-//TO-DO: Abstract the campaigns fetch logic here.
+// TO-DO: Abstract the campaigns fetch logic here
 
-import { useState, useEffect } from 'react'
+// 
 
-import { api as API } from '@/libs'
+import { useState, useEffect } from 'react';
 
+import { api as API } from '@/libs';
+
+/**
+ * A hook that return the user's campaigns
+ * @returns The user's campaigns
+ */
 const useCampaigns = () => {
-  const [campaigns, setCampaigns] = useState([])
-  
+  const [campaigns, setCampaigns] = useState([]);
+
   async function fetchCampaigns() {
-    const newCampaings = await API.getCampaigns()
-    setCampaigns(newCampaings)
+    const newCampaings = await API.getCampaigns();
+    setCampaigns(newCampaings);
   }
 
   useEffect(() => {
+    fetchCampaigns();
+  }, []);
 
-    fetchCampaigns()
+  return [campaigns, fetchCampaigns];
+};
 
-  }, [])
-
-  return [campaigns, fetchCampaigns]
-}
-
-export default useCampaigns
+export default useCampaigns;
