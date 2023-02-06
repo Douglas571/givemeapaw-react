@@ -40,30 +40,7 @@ function Campaigns() {
 
         <Stack spacing={2}>
           { campaigns.map((c) => (
-            <Card>
-              <CardActionArea>
-                <CardMedia
-                  sx={{ height: 140 }}
-                  image="public/img.jpg"
-                  title="dogs"
-                />
-                <CardContent>
-                  <Typography variant="h5">{c.title}</Typography>
-                  <Typography>
-                    {c.description}
-                  </Typography>
-
-                  {/* keep coding the campaigns link card */}
-
-                  <Box sx={{ display: 'flex' }}>
-                    <Typography sx={{ fontWeight: 'bold' }}>
-                      { c.collected }
-                      $ recaudados
-                    </Typography>
-                  </Box>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+            <CampaignItem campaign={c} />
           ))}
         </Stack>
       </div>

@@ -22,6 +22,8 @@ const CSS = css`
 function ProgressBar(props) {
   const { percent } = props;
 
+  console.log({percent})
+
   return (
     <div className="progress-bar bg-divisor" css={CSS}>
       <div className='bg-primary' style={{width: `${percent}%`}}></div>

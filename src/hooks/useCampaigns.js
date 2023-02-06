@@ -1,7 +1,5 @@
 // TO-DO: Abstract the campaigns fetch logic here
 
-// 
-
 import { useState, useEffect } from 'react';
 
 import { api as API } from '@/libs';
@@ -15,6 +13,7 @@ const useCampaigns = () => {
 
   async function fetchCampaigns() {
     const newCampaings = await API.getCampaigns();
+    // console.log({newCampaings});
     setCampaigns(newCampaings);
   }
 

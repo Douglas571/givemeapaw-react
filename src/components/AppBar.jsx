@@ -18,7 +18,7 @@ export default function ButtonAppBar() {
 
   return (
     <>
-      <MainMenu show={showMenu} onClose={() => toggleMenu()}/>
+      <MainMenu show={showMenu} onClose={() => toggleMenu()} />
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" color="blanco">
           <Toolbar>

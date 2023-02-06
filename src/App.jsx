@@ -22,6 +22,8 @@ import User from '@/views/User'
 
 import Campaigns from '@/views/Campaigns'
 import CampaignsAdmin from '@/views/CampaignsAdmin'
+import CampaignsView from '@/views/CampaignsView'
+import Donation from '@/views/Donation'
 
 
 import { ThemeProvider, useTheme, createTheme, alpha } from '@mui/material/styles';
@@ -49,7 +51,9 @@ function App() {
                             </Route>
 
                             <Route path="/campaigns">
-                                <Route index element={<Campaigns />}/>
+                                <Route index element={<Campaigns />} />
+                                <Route path=':id' element={<CampaignsView />} />
+                                <Route path=':id/donation' element={<Donation />} />
                             </Route>
 
 

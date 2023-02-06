@@ -1,3 +1,4 @@
+import React from 'react';
 import { css, keyframes, useTheme } from '@emotion/react'
 import { Link } from 'react-router-dom'
 
@@ -135,8 +136,7 @@ function MainMenu(props) {
 
   const showClass = show ? ' show' : ''
   return (
-    
-    <Drawer 
+    <Drawer
       className={'menu' + showClass}
       // css={MobilMenuCSS}
       open={show}
