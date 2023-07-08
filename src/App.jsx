@@ -48,6 +48,7 @@ function App() {
                             <Route path="/me" element={<ProtectedRoute/>}>
                                 <Route index element={<User/>}/>
                                 <Route path='/me/campaigns' element={<CampaignsAdmin />}/>
+                                <Route path='/me/campaigns/:id' element={<CampaignsView />}/>
                             </Route>
 
                             <Route path="/campaigns">
@@ -55,8 +56,6 @@ function App() {
                                 <Route path=':id' element={<CampaignsView />} />
                                 <Route path=':id/donation' element={<Donation />} />
                             </Route>
-
-
                         </Routes>
                     </BrowserRouter>
                 </div>

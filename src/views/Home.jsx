@@ -46,14 +46,14 @@ function Home() {
           <Typography variant="h3" color="primary" gutterBottom>Salvando Animales, Cambiando Vidas</Typography>
           <div className="grow relative">
             <div className="flex justify-center relative top-[60%]">
-              <Button variant="contained">
+              <Button variant="contained" data-test="campagins-button">
                 <Link to="/campaigns">Descubre campañas</Link>
               </Button>
             </div>
           </div>
         </div>
         {/* Panel #2 with the sign up shelter or ONG advertisement */}
-        <div className="panel p-8 pt-[5rem] flex flex-col" id="panel-2">
+        {/* <div className="panel p-8 pt-[5rem] flex flex-col" id="panel-2">
           <Typography variant="h3" color="secondary" gutterBottom>Ellos Necesitan de tu Ayuda</Typography>
           <div className="grow relative">
             <div className="flex justify-center relative top-[75%]">
@@ -62,7 +62,7 @@ function Home() {
               </Button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <Footer />
     </>

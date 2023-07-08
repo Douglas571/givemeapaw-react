@@ -13,109 +13,18 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemButton
+  ListItemButton,
+  Typography
 } from '@mui/material'
+
+import { useNavigate } from 'react-router-dom';
 
 function MainMenu(props) {
   const theme = useTheme()
   const { show, onClose } = props
   const { token, user, onLogout } = useAuth()
+  const navigate = useNavigate()
 
-  const MobilMenuCSS = css`
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1000;
-
-    left: -1000vh;
-
-    background-color: ${theme.colors.white};
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-
-    li {
-      list-style: none;
-    }
-
-    &.show {
-      left: 0;
-    }
-
-    #navbar-close-button {
-      display: flex;
-      justify-content: end;
-    }
-
-    #user-indicator {
-      padding-bottom: 1.5rem;
-      margin-bottom: 1.5rem;
-
-      display: flex;
-      align-items: center;
-      gap: 20px;
-
-      border-bottom: 1px solid ${theme.colors.divisor};
-
-      .avatar {
-        width: 65px;
-        border-radius: 100%;
-      }
-
-      .username {
-        font-size: 2.5rem;
-        font-weight: bold;
-
-        color: ${theme.colors.gray};
-      }
-    }
-
-    #navbar-menu {
-      flex: 1 1 auto;
-      display: flex;
-      flex-direction: column;
-
-      justify-content: space-between;
-
-      height: 100%;
-    }
-
-    #navbar-main, 
-    #navbar-footer{
-      margin: 2rem;
-
-      font-size: 2rem;
-      font-weight: bold;
-      color: ${theme.colors.gray}
-    }
-
-    #navbar-menu {
-      ul {
-        padding-left: 1rem;
-      }
-
-      li {
-        margin-bottom: .5rem;
-      }
-    }
-
-    #navbar-main {
-
-      section {
-        margin-bottom: 1.5rem;
-      }
-
-      h1 {
-        font-size: 1.5rem;
-        color: ${theme.colors.divisor};
-        margin-bottom: .5rem;
-      }
-    }
-
-    #navbar-footer {
-
-    }
-  `
   const toggleMenu = (evt) => {
     const el = evt.target
     const className = el.getAttribute('class')?.split(' ')
@@ -138,7 +47,6 @@ function MainMenu(props) {
   return (
     <Drawer
       className={'menu' + showClass}
-      // css={MobilMenuCSS}
       open={show}
       onClose={onClose}
     >
@@ -155,17 +63,17 @@ function MainMenu(props) {
             }}
           >
             <Avatar alt="Remy Sharp" src="profile.jpg" />
-            <div className="username">{user.username}</div>
+            <Typography sx={{ml: 2}}>{user.username}</Typography>
           </Box>
         </Link>
       )}
       
       <Box id="navbar-menu">
         <div id="navbar-main">
-
+          
           <Divider />
           <section>
-
+            <Typography>General</Typography>
             <List>
               <ListItem disablePadding>
                 <ListItemButton>
@@ -175,7 +83,7 @@ function MainMenu(props) {
 
               <ListItem disablePadding>
                 <ListItemButton>
-                <Link to="/campaigns">Campañas</Link>
+                  <Link to="/campaigns">Campañas</Link>
                 </ListItemButton>
               </ListItem>
 
@@ -186,20 +94,21 @@ function MainMenu(props) {
 
           { token && (
               <section>
+                <Typography>Administración</Typography>
                 <List>
-                  <ListItem disablePadding>
+                  {/* <ListItem disablePadding>
                     <ListItemButton>
                       Donaciones
                     </ListItemButton>
-                  </ListItem>
+                  </ListItem> */}
 
                   <ListItem disablePadding>
                     <ListItemButton>
-                      Campañas
+                      <Link to="/me/campaigns">Campañas</Link>
                     </ListItemButton>
                   </ListItem>
 
-                  <ListItem disablePadding>
+                  {/* <ListItem disablePadding>
                     <ListItemButton>
                       Métodos de Pago
                     </ListItemButton>
@@ -209,7 +118,7 @@ function MainMenu(props) {
                     <ListItemButton>
                       Perfil
                     </ListItemButton>
-                  </ListItem>
+                  </ListItem> */}
 
                 </List>
               </section>
@@ -217,24 +126,47 @@ function MainMenu(props) {
           }
 
         </div>
+
+        <Divider />
+
         <div id="navbar-footer">
-          <ul>
+          <List>
             { token
               ? (
                 <>
-                  <li>
-                    <Link to="/admin/config">Configuración</Link>
-                  </li>
-                  <li>
-                    <Link to="#" onClick={handleLogout}>Cerrar Sesión</Link>
-                  </li>
+                  {/* <ListItem disablePadding>
+                    <ListItemButton>
+                      <li>
+                        <Link to="/admin/config">Configuración</Link>
+                      </li>
+                    </ListItemButton>
+                  </ListItem> */}
+                  
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                        <Link to="#" onClick={handleLogout}>Cerrar Sesión</Link>
+                    </ListItemButton>
+                  </ListItem>
                 </>
               )
               : (
-                <li><Link to="/login">Iniciar Sesión</Link></li>
+                <>
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      <Link to="/login">Iniciar Sesión</Link>
+                    </ListItemButton>
+                  </ListItem>
+
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      <Link to="/regist">Registrate</Link>
+                    </ListItemButton>
+                  </ListItem>
+                  
+                </>
               )
             }
-          </ul>
+          </List>
         </div>
       </Box>
     </Drawer>

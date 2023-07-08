@@ -2,8 +2,11 @@ import * as fakeServer from './fake-server';
 
 const HOST = 'http://localhost:1337/api';
 
+
+// for fetch the campaigns from the api
 export async function getCampaigns() {
   let campaigns = [];
+
   try {
     let res = await fetch(`${HOST}/campaigns?populate=*`, {
       method: 'GET',
@@ -13,22 +16,38 @@ export async function getCampaigns() {
     });
 
     res = await res.json();
-    // console.log({ res });
+    console.log({ res });
 
     campaigns = res.data;
+
+
   } catch (err) {
     // console.log(err);
   }
-  // console.log({inApi: campaigns})
 
-  return campaigns.map((c) => ({
-    ...c.attributes,
-    id: c.id,
-    cover: {
-      url: c.attributes.cover.data.attributes.url,
-      formats: c.attributes.cover.data.attributes.formats,
-    },
-  }));
+  
+
+  // return campaigns.map((c) => ({
+  //   ...c.attributes,
+  //   id: c.id,
+  //   cover: {
+  //     url: c.attributes.cover.data.attributes.url,
+  //     formats: c.attributes.cover.data.attributes.formats,
+  //   },
+  // }));
+
+  return campaigns.map((c) => {
+    console.log({c})
+
+    return {
+      id: c.id,
+      ...c.attributes,
+      cover: {
+        url: "http://localhost:1337" + c.attributes.cover.data?.attributes.url,
+        formats: c.attributes.cover.data?.attributes.formats,
+      },
+    }
+  })
 }
 
 export function a() {

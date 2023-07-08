@@ -12,15 +12,17 @@ function CampaignItem(props) {
   const navigate = useNavigate();
 
   console.log(campaign)
+  console.log(campaign.cover.url)
 
   return (
     <Card>
       <CardActionArea
+        data-test="campaign-action"
         onClick={() => navigate(`${campaign.id}`)}
       >
         <CardMedia
           sx={{ height: 140 }}
-          image="public/img.jpg"
+          image={ campaign.cover.url || "public/img.jpg"}
           title="dogs"
         />
         <CardContent>

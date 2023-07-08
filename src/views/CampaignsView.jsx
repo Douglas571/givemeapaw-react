@@ -58,7 +58,6 @@ function CampaignsView() {
     navigate(url)
   }
 
-
   return (
     <div className="campaign">
       <DeadEndMenu />
@@ -68,7 +67,7 @@ function CampaignsView() {
           <>
             <img
               height="10"
-              src="/public/img.jpg"
+              src={campaign?.cover?.url || undefined}
               alt="lajñfla"
             />
 

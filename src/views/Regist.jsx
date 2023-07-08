@@ -87,7 +87,7 @@ const Regist = () => {
       <div css={CSS}>
         <div className="container">
           <h1 className="title">Registro</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} data-test="register-form">
 
             <TextField
               name='name'
@@ -111,7 +111,7 @@ const Regist = () => {
                 icon={<Icon be="key"/>}/>              
             </div>
 
-            <div className="regist-button-box"><Button>Registrarce</Button></div>
+            <div className="regist-button-box"><Button>Registrarse</Button></div>
           </form>
           <p>¿Ya tienes una cuenta? <Link className="link" to="/login">Inicia Seción</Link></p>
         </div>

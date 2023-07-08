@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
 import { css } from '@emotion/react';
+import { Alert } from '@mui/material';
 
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -21,7 +22,7 @@ import TextField from '@/components/TextField';
 
 function Login() {
   const { onLogin } = useAuth();
-  const [errorMsg, setErrorMsg] = useState('');
+  const [badUserOrPassword, setBadUserOrPassword] = useState(false)
 
   const navigate = useNavigate();
 
@@ -39,9 +40,21 @@ function Login() {
     };
 
     console.log('before login');
-    await onLogin(userData);
-    console.log('pass login');
-    navigate('/me');
+    try {
+      await onLogin(userData);
+      console.log('pass login');
+      navigate('/me');
+    } catch(err) {
+      setBadUserOrPassword(true)
+
+      setTimeout(() => {
+
+        setBadUserOrPassword(false)
+
+      }, 5000)
+    }
+
+    
 
     // try {
     //   console.log('before login');
@@ -144,11 +157,12 @@ function Login() {
 
             <TextField
               name="password"
+              type="password"
               placeholder="Contraseña"
               icon={<Icon be="key" />}
             />
 
-            { errorMsg && <div className="err-msg"><p>{errorMsg}</p></div> }
+            { badUserOrPassword && <Alert sx={{ mb: 2}} severity="error">Usuario o contraseña incorrectas</Alert>}
 
             <div className="login-button">
               <Button>Iniciar Sesión</Button>

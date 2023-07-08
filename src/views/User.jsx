@@ -29,68 +29,8 @@ const User = () => {
 
   const [ campaigns, updateCampaigns ] = useCampaigns()
 
-  const CSS = css`
-    min-height: 100vh;
-
-    font-size: 1.6rem;
-    background-color: ${theme.colors.background};
-
-    .info {
-      padding: 1rem;
-    }
-
-    .justify-center {
-      justify-content: center;
-    }
-
-    .align-center {
-      align-items: center;
-    }
-
-
-    .centered {
-      text-align: center;
-    }
-
-    .bordered-box {
-      margin-top: 1rem;
-      padding: 1rem;
-
-      border: 1px solid ${theme.colors.divisor};
-      border-radius: 3px;
-
-      .title {
-        font-size: 2rem;
-      }
-    }
-
-    .donation-item {
-      display: flex;
-      gap: 1rem;
-
-      .avatar {
-        width: 50px;
-        height: 50px;;
-        background-color: ${theme.colors.gray};
-        border-radius: 1000%;
-
-
-      }
-
-      .price {
-        
-      }
-    }
-
-    .link {
-      color: ${theme.colors.primary};
-      text-decoration: underline;
-    }
-    
-
-  `
   return (
-    <div css={CSS}>
+    <div >
       <AppBar/>
       <div className='p-5'>
 
@@ -128,7 +68,7 @@ const User = () => {
         </Box>
 
         {/* Donations Shorcut List */}
-        <Box>
+        {/* <Box>
           <Title>Donaciones Pendientes</Title>
           <div>
             <div className='donation-item bordered-box hover:shadow-lg'>
@@ -143,7 +83,7 @@ const User = () => {
           <div className='text-center mt-5'>
             <Link to='/me/donations'>Ver Más</Link>
           </div>
-        </Box>
+        </Box> */}
 
         <Outlet/>
       </div>

@@ -1,6 +1,6 @@
 import { useParams, useSearchParams } from 'react-router-dom'
 
-import { Paper, Typography } from '@mui/material'
+import { Button, Paper, Stack, TextField, Typography } from '@mui/material'
 
 import DeadEndLayout from '@/layout/DeadEndLayout'
 import { Box } from '@mui/system'
@@ -12,13 +12,17 @@ const Donation = () => {
 
   console.log({query})
 
+  function copyToClickboard(string) {
+    navigator.clipboard.writeText(this.state.textToCopy)
+  }
+
   const convertToBs = (amount) => {
-    return amount
+    return amount * 27
   }
   return (
     <DeadEndLayout>
 
-      <Paper sx={{ m: 2, p: 2 }}>
+      <Paper sx={{ display: 'flex', 'flex-flow': 'column', gap: 2, m: 2, p: 2 }}>
         <Typography
           variant="h3"
         >
@@ -26,21 +30,34 @@ const Donation = () => {
         </Typography>
 
         <Typography variant="h6">
-          Total a Pagar
+          Total a Pagar: {query.amount}$
         </Typography>
 
-        <h2>Metodos de pago</h2>
+        <Typography>
+          Pago Móvil: pagar 0102 04120615855 29374865 MONTO 
+          <Button onClick={() => copyToClickboard("pagar 0102 04120615855 29374865 MONTO")}>Copiar</Button>
+        </Typography>
 
-        <h3>Pago mobil</h3>
-        <p>pagar 0102 04120615855 29374865 {convertToBs(query.amount)}</p>
-        <button>Copiar</button>
+        <Typography variant='h7'>Transferencia (Venezuela)</Typography>
+        
+        <Typography>
+          <Box>
+            {"Cedula: 29374865 "}
+            <Button onClick={() => copyToClickboard("29374865")}>Copiar</Button>
+          </Box>
 
-        <h3>transferencia</h3>
-        <p>Banco de Venezuela: 01020984891209348914</p>
-        <button>Copiar</button>
+          <Box>
+            {"Número de cuenta: 01020984891209348914 "}
+            <Button onClick={() => copyToClickboard("01020984891209348914")}>Copiar</Button>
+          </Box>
+        </Typography>
 
-        <h3>PayPal</h3>
-        <p>No idea how to pay by paypal</p>
+        <TextField
+          name="pay-ref"
+          label={"Referencia de pago"}
+        />
+
+        <Button variant='contained'>Enviar referencia</Button>
 
       </Paper>
 

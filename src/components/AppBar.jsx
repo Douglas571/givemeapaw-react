@@ -5,15 +5,24 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
+import { useNavigate } from 'react-router'
+
 import MainMenu from '@/components/MainMenu'
 
 // import MenuIcon from '@mui/icons-material/Menu';
 import Icon from '@/components/Icon';
 
 export default function ButtonAppBar() {
+  // Variables
   const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate()
+
   function toggleMenu() {
     setShowMenu(!showMenu);
+  }
+
+  function navigateToHome() {
+    navigate('/')
   }
 
   return (
@@ -34,7 +43,8 @@ export default function ButtonAppBar() {
               {/* <MenuIcon /> */}
               <Icon be="menu" />
             </IconButton>
-            <Typography variant="h6" color="primary" component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" color="primary" component="div" sx={{ flexGrow: 1 }}
+              onClick={() => navigateToHome()}>
               Give Me A Paw
             </Typography>
             {/* <Button color="inherit">Login</Button> */}
