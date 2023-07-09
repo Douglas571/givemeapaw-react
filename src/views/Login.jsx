@@ -1,33 +1,40 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
-import { Alert } from '@mui/material';
-
 import { useNavigate, Link } from 'react-router-dom';
+
+import { Alert, Box, Button, IconButton, Input, InputAdornment, Paper, Stack, TextField, Typography } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import KeyIcon from '@mui/icons-material/Key';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 
 import { useAuth } from '@/hooks/Auth';
 
-// import DeadEndLayout from '@/layout/DeadEndLayout';
 
 import NavBarEndMenu from '@/components/NavBarEndMenu';
 import Footer from '@/components/Footer';
 
-import Icon from '@/components/Icon';
-
-import Box from '@/components/Box';
-import Title from '@/components/Title';
-
-import Button from '@/components/Button';
-import TextField from '@/components/TextField';
 
 function Login() {
+  const [ showPassword, setShowPassword ] = useState(false)
+  const handleClickShwoPassword = () => setShowPassword((show) => !show)
+  const handleMouseDownPassword = () => (evt) => {
+    evt.preventDefault()
+  }
+
   const { onLogin } = useAuth();
   const [badUserOrPassword, setBadUserOrPassword] = useState(false)
 
+  
   const navigate = useNavigate();
 
+
+  // TODO: configure the textfields of email and password to extract the data 
+  // when click "iniciar sesión"
   async function handleLogin(evt) {
     evt.preventDefault();
-    // console.log('login');
+    console.log({name: evt.target.name})
 
     // const form = evt.target
 
@@ -57,44 +64,78 @@ function Login() {
   return (
     <div>
       <NavBarEndMenu />
-      <div>
-        <Box>
-          <div>
-            <Title>Inicio de Sesión</Title>
-          </div>
+      <Box sx={{ p: "2rem"}}>
+        <Paper>
+          <Stack sx={{ p: "3rem" }}>
+            
+            <Typography 
+              sx={{ textAlign: "center", mb: "2rem"}} 
+              variant="h3"
+            >
+              Inicio de Sesión
+            </Typography>
 
-          <form onSubmit={handleLogin} data-test="login-form">
-            <TextField
-              name="email"
-              placeholder="Correo"
-              icon={<Icon be="email" />}
+            <TextField 
+              sx={{ mb: "2rem" }} 
+              label='Usuario'
+              name='email'
+
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position='start'>
+                    <AccountCircleIcon/>
+                  </InputAdornment>
+                )
+              }}
+            
             />
 
-            <TextField
-              name="password"
-              type="password"
-              placeholder="Contraseña"
-              icon={<Icon be="key" />}
+            <TextField 
+              sx={{ mb: "2rem" }} 
+              label='Contraseña'
+              name='password'
+              type={showPassword ? 'text' : 'password'}
+
+              
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position='start'>
+                    <KeyIcon/>
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      onClick={handleClickShwoPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge='end'>
+                      { showPassword ? <VisibilityOff/> : <Visibility/> }
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
             />
 
-            { badUserOrPassword && <Alert sx={{ mb: 2}} severity="error">Usuario o contraseña incorrectas</Alert>}
 
-            <div>
-              <Button>Iniciar Sesión</Button>
-            </div>
-          </form>
+            <Button 
+              sx={{ mb:"2rem" }} 
+              variant='contained'
+              onClick={handleLogin}
+            >
+              Iniciar Sesión
+            </Button>
 
-          <p>
-            ¿Has olvidado tu contraseña?
-            <Link to="/recover-password"> Recuperar Contraseña</Link>
-          </p>
-          <p>
-            ¿No tienes cuenta?
-            <Link to="/regist"> Registrate</Link>
-          </p>
-        </Box>
-
-      </div>
+            <Typography sx={{ textAlign: "center" }}>
+              ¿Olvidaste tu contraseña?
+            </Typography>
+            <Typography sx={{ textAlign: "center" }}>
+              ¿No tienes cuénta? Registrate
+            </Typography>
+          </Stack>
+          
+          
+        </Paper>
+      </Box>
       <Footer />
     </div>
   );
