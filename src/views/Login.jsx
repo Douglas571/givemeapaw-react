@@ -1,6 +1,5 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
-import { css } from '@emotion/react';
 import { Alert } from '@mui/material';
 
 import { useNavigate, Link } from 'react-router-dom';
@@ -56,11 +55,11 @@ function Login() {
   }
 
   return (
-    <div className="bg-background min-h-screen">
+    <div>
       <NavBarEndMenu />
-      <div css={styles} className="p-5 flex justify-center">
-        <Box className="">
-          <div className="mb-10 py-[6rem] border-b-[1px] text-center">
+      <div>
+        <Box>
+          <div>
             <Title>Inicio de Sesión</Title>
           </div>
 
@@ -80,18 +79,18 @@ function Login() {
 
             { badUserOrPassword && <Alert sx={{ mb: 2}} severity="error">Usuario o contraseña incorrectas</Alert>}
 
-            <div className="login-button">
+            <div>
               <Button>Iniciar Sesión</Button>
             </div>
           </form>
 
           <p>
             ¿Has olvidado tu contraseña?
-            <Link className="text-primary underline" to="/recover-password"> Recuperar Contraseña</Link>
+            <Link to="/recover-password"> Recuperar Contraseña</Link>
           </p>
           <p>
             ¿No tienes cuenta?
-            <Link className="text-primary underline" to="/regist"> Registrate</Link>
+            <Link to="/regist"> Registrate</Link>
           </p>
         </Box>
 
