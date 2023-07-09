@@ -1,56 +1,10 @@
-import { css } from '@emotion/react'
-
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { useAuth } from '@/hooks/Auth'
 
 import DeadEndLayout from '@/layout/DeadEndLayout'
 
-import Icon from '@/components/Icon'
-
-import Button from '@/components/Button'
-import TextField from '@/components/TextField'
-
-const CSS = css`
-  .title {
-    margin-bottom: 2rem;
-
-    font-size: 3rem;
-    font-weight: 700;
-
-    text-align: center;
-  }
-
-  .container {
-    margin: 2rem;
-    background: var(--cultured);
-    padding: 2rem;
-
-    box-shadow: 0px 8px 13px 0px rgba(0,0,0,0.35);
-    -webkit-box-shadow: 0px 8px 13px 0px rgba(0,0,0,0.35);
-    -moz-box-shadow: 0px 8px 13px 0px rgba(0,0,0,0.35);
-
-    border-radius: 3px;
-  }
-
-  p {
-    color: var(--gray);
-    font-size: 1.4rem;
-    text-align: center;
-  }
-
-  .link {
-    color: var(--blue);
-
-    &:active {
-      text-decoration: underline;
-    }
-  }
-
-  .regist-button-box {
-    margin-bottom: 2rem;
-  }
-`
+import { Box, Paper, Stack, Typography, TextField, Button, Link } from '@mui/material'
 
 const Regist = () => {
   const { onRegist } = useAuth()
@@ -83,38 +37,44 @@ const Regist = () => {
 
   return (
     <DeadEndLayout>
-      <div css={CSS}>
-        <div className="container">
-          <h1 className="title">Registro</h1>
-          <form onSubmit={handleSubmit} data-test="register-form">
 
+      <Box m={2}>
+        <Paper sx={{ p: 3}}>
+          
+          <Stack spacing={3}>
+            <Typography variant='h3' sx={{textAlign: 'center'}}>
+              Registro
+            </Typography>
             <TextField
-              name='name'
-              placeholder="Nombre"
-              icon={<Icon be="account_circle"/>}/>
+              label='Nombre'
+            />
 
-            <TextField
-              name='surname'
-              placeholder="Apellido"
-              icon={<Icon/>}/>
+            <TextField 
+              label='Apellido'
+            />
 
-            <TextField
-              name='email'
-              placeholder="Correo"
-              icon={<Icon be="email"/>}/>
+            <TextField 
+              label='Correo'
+            />
 
-            <div>
-              <TextField
-                name='password'
-                placeholder="Contraseña"
-                icon={<Icon be="key"/>}/>              
-            </div>
+            <TextField 
+              label='Contraseña'
+              type='password'
+            />
 
-            <div className="regist-button-box"><Button>Registrarse</Button></div>
-          </form>
-          <p>¿Ya tienes una cuenta? <Link className="link" to="/login">Inicia Seción</Link></p>
-        </div>
-      </div>
+            <TextField 
+              label='Repetir contraseña'
+              type='password'
+            />
+
+            <Button variant='contained'>Registrarce</Button>
+            <Typography sx={{ textAlign: 'center'}}>
+              ¿Ya tienes una cuénta? <Link to='/login'>Inicia sesión</Link>
+            </Typography>
+          </Stack>
+
+        </Paper>
+      </Box>
     </DeadEndLayout>
   )
 }
