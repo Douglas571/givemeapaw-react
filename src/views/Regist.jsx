@@ -4,7 +4,6 @@ import { useNavigate, Link } from 'react-router-dom'
 
 import { useAuth } from '@/hooks/Auth'
 
-import Box from '@/layout/Box'
 import DeadEndLayout from '@/layout/DeadEndLayout'
 
 import Icon from '@/components/Icon'

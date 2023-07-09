@@ -2,7 +2,21 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-import { Alert, Box, Button, IconButton, Input, InputAdornment, Paper, Stack, TextField, Typography } from '@mui/material';
+import { Alert, 
+  Box, 
+  Button, 
+  FormControl, 
+  IconButton, 
+  Input, 
+  InputAdornment, 
+  Paper, 
+  Stack, 
+  TextField, 
+  Typography,
+  Link as MLink,
+} from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import KeyIcon from '@mui/icons-material/Key';
 import Visibility from '@mui/icons-material/Visibility';
@@ -15,9 +29,40 @@ import { useAuth } from '@/hooks/Auth';
 import NavBarEndMenu from '@/components/NavBarEndMenu';
 import Footer from '@/components/Footer';
 
+function GLink (props) {
+  const theme = useTheme()
+
+  return (
+    <Box 
+      sx={{display: 'inline', color: theme.palette.primary.main }}
+    >
+      <Link to={props.to}>
+        {props.children}
+      </Link>
+    </Box>
+  )
+}
+
+
+function PrimaryLink(props) {
+  return (
+    <Link to={props.to}>
+      <Typography sx={{ color: 'green'}}>
+        {props.children}
+      </Typography>
+    </Link>
+  )
+}
 
 function Login() {
   const [ showPassword, setShowPassword ] = useState(false)
+  const [ userData, setUserData ] = useState({
+    email: '',
+    password: ''
+  })
+
+  
+
   const handleClickShwoPassword = () => setShowPassword((show) => !show)
   const handleMouseDownPassword = () => (evt) => {
     evt.preventDefault()
@@ -30,8 +75,19 @@ function Login() {
   const navigate = useNavigate();
 
 
-  // TODO: configure the textfields of email and password to extract the data 
-  // when click "iniciar sesión"
+  // TODO: finish the login functionality, it not comunicate with API yet
+
+  const handleChange = (evt) => {
+    evt.preventDefault()
+    const key = evt.target.name
+    const value = evt.target.value
+
+    const newUserData = {...userData}
+    newUserData[key] = value
+    
+    setUserData(newUserData)
+  }
+
   async function handleLogin(evt) {
     evt.preventDefault();
     console.log({name: evt.target.name})
@@ -66,19 +122,28 @@ function Login() {
       <NavBarEndMenu />
       <Box sx={{ p: "2rem"}}>
         <Paper>
-          <Stack sx={{ p: "3rem" }}>
+          <Stack 
+            spacing={4}
+            sx={{ p: "3rem" }}
+          >
             
             <Typography 
-              sx={{ textAlign: "center", mb: "2rem"}} 
+              sx={{ textAlign: "center"}} 
               variant="h3"
             >
               Inicio de Sesión
             </Typography>
 
-            <TextField 
-              sx={{ mb: "2rem" }} 
+            
+            <TextField
               label='Usuario'
               name='email'
+
+              value={userData.email}
+              onChange={handleChange}
+
+              // error={!!myForm.errors.companyName}
+              // helperText={myForm.errors.companyName}
 
               InputProps={{
                 startAdornment: (
@@ -86,17 +151,17 @@ function Login() {
                     <AccountCircleIcon/>
                   </InputAdornment>
                 )
-              }}
-            
+              }}    
             />
 
             <TextField 
-              sx={{ mb: "2rem" }} 
               label='Contraseña'
               name='password'
               type={showPassword ? 'text' : 'password'}
-
               
+              value={userData.password}
+              onChange={handleChange}
+
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
@@ -116,7 +181,7 @@ function Login() {
               }}
             />
 
-
+            {/* the button to login */}
             <Button 
               sx={{ mb:"2rem" }} 
               variant='contained'
@@ -125,15 +190,16 @@ function Login() {
               Iniciar Sesión
             </Button>
 
-            <Typography sx={{ textAlign: "center" }}>
-              ¿Olvidaste tu contraseña?
-            </Typography>
-            <Typography sx={{ textAlign: "center" }}>
-              ¿No tienes cuénta? Registrate
-            </Typography>
+            {/* the bottom options */}
+            <Box>
+              <Typography sx={{ textAlign: "center" }}>
+                <GLink>¿Olvidaste tu contraseña?</GLink>
+              </Typography>
+              <Typography sx={{ textAlign: "center" }}>
+                ¿No tienes cuénta? <GLink to='/regist'>Registrate</GLink>
+              </Typography>
+            </Box>
           </Stack>
-          
-          
         </Paper>
       </Box>
       <Footer />
