@@ -13,7 +13,7 @@ import { css } from '@emotion/react'
 
 import { AuthProvider, useAuth } from '@/hooks/Auth'
 
-import Theme from '@/theme.js'
+import Theme from '@/theme.jsx'
 
 import Home from '@/views/Home'
 import Login from '@/views/Login'

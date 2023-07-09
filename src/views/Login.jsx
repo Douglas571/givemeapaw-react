@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Alert, 
   Box, 
@@ -13,7 +13,7 @@ import { Alert,
   Stack, 
   TextField, 
   Typography,
-  Link as MLink,
+  Link,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
@@ -28,20 +28,6 @@ import { useAuth } from '@/hooks/Auth';
 
 import NavBarEndMenu from '@/components/NavBarEndMenu';
 import Footer from '@/components/Footer';
-
-function GLink (props) {
-  const theme = useTheme()
-
-  return (
-    <Box 
-      sx={{display: 'inline', color: theme.palette.primary.main }}
-    >
-      <Link to={props.to}>
-        {props.children}
-      </Link>
-    </Box>
-  )
-}
 
 
 function PrimaryLink(props) {
@@ -76,6 +62,7 @@ function Login() {
 
 
   // TODO: finish the login functionality, it not comunicate with API yet
+  
 
   const handleChange = (evt) => {
     evt.preventDefault()
@@ -193,10 +180,10 @@ function Login() {
             {/* the bottom options */}
             <Box>
               <Typography sx={{ textAlign: "center" }}>
-                <GLink>¿Olvidaste tu contraseña?</GLink>
+                <Link>¿Olvidaste tu contraseña?</Link>
               </Typography>
               <Typography sx={{ textAlign: "center" }}>
-                ¿No tienes cuénta? <GLink to='/regist'>Registrate</GLink>
+                ¿No tienes cuénta? <Link to='/regist'>Registrate</Link>
               </Typography>
             </Box>
           </Stack>

@@ -1,3 +1,16 @@
+import {forwardRef} from 'react'
+import { Link } from 'react-router-dom'
+import { Link as MLink } from '@mui/material'
+
+const GLink = forwardRef((props, ref) => {
+  return (
+    <MLink component={Link} ref={ref} to={props.to}>
+      {props.children}
+    </MLink>
+  )
+}) 
+
+
 const theme = {
   colors: {
     primary: 'hsl(181, 48%, 51%)',
@@ -28,6 +41,18 @@ const theme = {
       fontWeight: 700,
     },
   },
+  components: {
+    MuiLink: {
+      defaultProps: {
+        component: GLink,
+      },
+      MuiButtonBase: {
+        defualtProps: {
+          LinkComponent: GLink
+        }
+      }
+    }
+  }
 }
 
 export default theme
