@@ -41,14 +41,14 @@ function PrimaryLink(props) {
 }
 
 function Login() {
-  const [ showPassword, setShowPassword ] = useState(false)
+  
   const [ userData, setUserData ] = useState({
     email: '',
     password: ''
   })
 
-  
-
+  // Password related logic
+  const [ showPassword, setShowPassword ] = useState(false)
   const handleClickShwoPassword = () => setShowPassword((show) => !show)
   const handleMouseDownPassword = () => (evt) => {
     evt.preventDefault()
