@@ -45,7 +45,7 @@ export async function regist(newUser) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      username: `${newUser.name}${newUser.surname}`,
+      username: `${newUser.name}_${newUser.surname}`,
       email: newUser.email,
       password: newUser.password,
     }),

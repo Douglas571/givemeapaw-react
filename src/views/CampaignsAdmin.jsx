@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Box, Paper, TextField, Typography, Button, Stack, Alert } from '@mui/material'
 
 
+import { useAuth } from '@/hooks/Auth';
 import NavBarEndMenu from "../components/NavBarEndMenu"
 import CampaignItem from '@/components/CampaignItem'
 
@@ -10,6 +11,7 @@ import useCampaigns from '../hooks/useCampaigns';
 const CampaignsAdmin = () => {
 
 
+    const { token } = useAuth()
     const [newCampaign, setNewCampaing] = useState({
         name: '',
         description: '',
@@ -80,7 +82,11 @@ const CampaignsAdmin = () => {
         formData.append('data', JSON.stringify(data))
 
         console.log('publishing campaign...')
+        console.log({token})
         let res = await fetch('http://localhost:1337/api/campaigns', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },        
             method: 'post',
             body: formData
         })
@@ -159,6 +165,7 @@ const CampaignsAdmin = () => {
                 </Paper>
             </Box>
 
+            {/*! remove for a while*/}
             <Box>
                 <Paper sx={{ display: 'flex', 'flex-flow': 'column', gap: 2, m: 2, p: 2 }}>
                     <Typography variant='h3'>

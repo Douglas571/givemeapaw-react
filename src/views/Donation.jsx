@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 
 import { Button, Paper, Stack, TextField, Typography } from '@mui/material'
@@ -5,12 +6,19 @@ import { Button, Paper, Stack, TextField, Typography } from '@mui/material'
 import DeadEndLayout from '@/layout/DeadEndLayout'
 import { Box } from '@mui/system'
 
+import {useAuth} from '@/hooks/Auth'
+
 const Donation = () => {
+
+  const referenceInputRef = useRef(null)
+
+  const { user } = useAuth()
+
   const params = useParams()
   const [searchParams] = useSearchParams()
   const query = Object.fromEntries([...searchParams])
 
-  console.log({query})
+  
 
   function copyToClickboard(string) {
     navigator.clipboard.writeText(this.state.textToCopy)
@@ -19,6 +27,46 @@ const Donation = () => {
   const convertToBs = (amount) => {
     return amount * 27
   }
+
+  const makeDonation = async () => {
+    const reference = referenceInputRef.current.value
+    console.log('the reference is: ', reference)
+
+    const newDonation = {
+      user: user.email,
+      amount: query.amount,
+      campaign: params.id,
+      comment: '',
+      verified: false,
+      reference: reference
+    }
+
+    console.log({newDonation})
+
+    try {
+      const res = await fetch('http://localhost:1337/api/donations', {
+        method: 'post',
+        headers: {
+          // Authorization: `Bearer ${token}`
+          'Content-Type': 'application/json',
+        }, 
+        body: JSON.stringify({data: newDonation})
+      })
+
+
+      const data = await res.json()
+
+      console.log({data})
+
+
+    } catch (err) {
+      console.log({err})
+    }
+    
+
+    
+  }
+
   return (
     <DeadEndLayout>
 
@@ -55,9 +103,10 @@ const Donation = () => {
         <TextField
           name="pay-ref"
           label={"Referencia de pago"}
+          inputRef={referenceInputRef}
         />
 
-        <Button variant='contained'>Enviar referencia</Button>
+        <Button variant='contained' onClick={makeDonation}>Enviar referencia</Button>
 
       </Paper>
 
