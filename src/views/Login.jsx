@@ -77,30 +77,19 @@ function Login() {
 
   async function handleLogin(evt) {
     evt.preventDefault();
-    console.log({name: evt.target.name})
-
-    // const form = evt.target
-
-    const { email, password } = evt.target.elements;
-
-    const userData = {
-      email: email.value,
-      password: password.value,
-    };
 
     console.log('before login');
     try {
       await onLogin(userData);
       console.log('pass login');
       navigate('/me');
+      
     } catch(err) {
       setBadUserOrPassword(true)
-
       setTimeout(() => {
-
         setBadUserOrPassword(false)
+      }, 3000)
 
-      }, 5000)
     }    
   }
 
@@ -168,6 +157,9 @@ function Login() {
               }}
             />
 
+
+            { badUserOrPassword && <Alert severity='error'>Usuario o contraseña incorreta</Alert> }
+            
             {/* the button to login */}
             <Button 
               sx={{ mb:"2rem" }} 
