@@ -30,15 +30,6 @@ import NavBarEndMenu from '@/components/NavBarEndMenu';
 import Footer from '@/components/Footer';
 
 
-function PrimaryLink(props) {
-  return (
-    <Link to={props.to}>
-      <Typography sx={{ color: 'green'}}>
-        {props.children}
-      </Typography>
-    </Link>
-  )
-}
 
 function Login() {
   
