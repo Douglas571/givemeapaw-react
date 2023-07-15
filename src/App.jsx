@@ -2,8 +2,6 @@ import {
     BrowserRouter,
     Routes,
     Route,
-    Link,
-    useLocation,
   
     Outlet,
     Navigate
@@ -23,6 +21,9 @@ import User from '@/views/User'
 import Campaigns from '@/views/Campaigns'
 import CampaignsAdmin from '@/views/CampaignsAdmin'
 import CampaignsView from '@/views/CampaignsView'
+
+import DonationsAdmin from './views/DonationsAdmin'
+
 import Donation from '@/views/Donation'
 
 
@@ -49,6 +50,8 @@ function App() {
                                 <Route index element={<User/>}/>
                                 <Route path='/me/campaigns' element={<CampaignsAdmin />}/>
                                 <Route path='/me/campaigns/:id' element={<CampaignsView />}/>
+
+                                <Route path='/me/donations' element={<DonationsAdmin />}/>
                             </Route>
 
                             <Route path="/campaigns">

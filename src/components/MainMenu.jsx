@@ -108,12 +108,14 @@ function MainMenu(props) {
                     </ListItemButton>
                   </ListItem>
 
-                  {/* <ListItem disablePadding>
-                    <ListItemButton>
-                      Métodos de Pago
-                    </ListItemButton>
+                   <ListItem disablePadding>
+                    <Link to="/me/donations">
+                      <ListItemButton>
+                        Donaciones
+                      </ListItemButton>
+                    </Link>
                   </ListItem>
-
+                  {/*
                   <ListItem disablePadding>
                     <ListItemButton>
                       Perfil
