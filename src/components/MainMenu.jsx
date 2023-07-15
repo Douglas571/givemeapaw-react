@@ -109,11 +109,9 @@ function MainMenu(props) {
                   </ListItem>
 
                    <ListItem disablePadding>
-                    <Link to="/me/donations">
                       <ListItemButton>
-                        Donaciones
+                        <Link to="/me/donations">Donaciones</Link>
                       </ListItemButton>
-                    </Link>
                   </ListItem>
                   {/*
                   <ListItem disablePadding>
