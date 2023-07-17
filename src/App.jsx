@@ -22,6 +22,8 @@ import Campaigns from '@/views/Campaigns'
 import CampaignsAdmin from '@/views/CampaignsAdmin'
 import CampaignsView from '@/views/CampaignsView'
 
+import Adoptions from '@/views/Adoptions'
+
 import DonationsAdmin from './views/DonationsAdmin'
 
 import Donation from '@/views/Donation'
@@ -58,6 +60,10 @@ function App() {
                                 <Route index element={<Campaigns />} />
                                 <Route path=':id' element={<CampaignsView />} />
                                 <Route path=':id/donation' element={<Donation />} />
+                            </Route>
+
+                            <Route path="/adoptions">
+                                <Route index element={<Adoptions />} />
                             </Route>
                         </Routes>
                     </BrowserRouter>

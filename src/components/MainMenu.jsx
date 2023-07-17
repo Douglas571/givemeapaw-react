@@ -87,6 +87,12 @@ function MainMenu(props) {
                 </ListItemButton>
               </ListItem>
 
+              <ListItem disablePadding>
+                  <ListItemButton>
+                    <Link to="/adoptions">Adopción</Link>
+                  </ListItemButton>
+              </ListItem>
+
             </List>
           </section>
 
