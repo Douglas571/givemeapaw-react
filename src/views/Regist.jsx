@@ -12,6 +12,7 @@ import KeyIcon from '@mui/icons-material/Key';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import EmailIcon from '@mui/icons-material/Email';
+import KAppBar from '../components/KAppBar'
 
 
 const Regist = () => {
@@ -78,9 +79,10 @@ const Regist = () => {
   
 
   return (
-    <DeadEndLayout>
+    <>
+      <KAppBar title='Registro'/>
 
-      <Box m={2}>
+      <Box mt={7} p={2}>
         <Paper sx={{ p: 3}}>
           
           <Stack spacing={3}>
@@ -200,7 +202,7 @@ const Regist = () => {
 
         </Paper>
       </Box>
-    </DeadEndLayout>
+    </>
   )
 }
 

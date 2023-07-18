@@ -16,7 +16,7 @@ import {
   Stack, 
   Typography } from '@mui/material'
 
-import AppBar from '@/components/AppBar'
+import KAppBar from '@/components/KAppBar'
 import CampaignItem from '@/components/CampaignItem'
 
 import useCampaigns from '../hooks/useCampaigns';
@@ -129,7 +129,7 @@ function Campaigns() {
 
   return (
     <>
-      <AppBar title='Campañas'/>
+      <KAppBar title='Campañas'/>
       
       <Box mt={7} p={2} sx={{background: '#f3f3f3', height: '100vh'}}>
         <Paper sx={{p: 2}}>

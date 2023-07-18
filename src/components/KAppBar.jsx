@@ -4,15 +4,13 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import { useNavigate } from 'react-router'
 
 import MainMenu from '@/components/MainMenu'
 
-// import MenuIcon from '@mui/icons-material/Menu';
-import Icon from '@/components/Icon';
-
-export default function CAppBar(props) {
+export default function KAppBar(props) {
   // Variables
 
   const { title } = props
@@ -21,10 +19,6 @@ export default function CAppBar(props) {
 
   function toggleMenu() {
     setShowMenu(!showMenu);
-  }
-
-  function navigateToHome() {
-    navigate('/')
   }
 
   return (
@@ -43,7 +37,7 @@ export default function CAppBar(props) {
               onClick={() => toggleMenu()}
             >
               {/* <MenuIcon /> */}
-              <Icon be="menu" />
+              <MenuIcon color='primary' />
             </IconButton>
             <Typography variant="h6" color="primary" component="div" sx={{ flexGrow: 1 }}>
               { title ? title : 'Give Me A Paw' }

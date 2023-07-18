@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 
 import { Link } from 'react-router-dom';
 
-import AppBar from '@/components/AppBar';
+import KAppBar from '@/components/KAppBar';
 // import Button from '@/components/Button'
 
 import Footer from '@/components/Footer';
@@ -38,7 +38,7 @@ function Home() {
 
   return (
     <>
-      <AppBar />
+      <KAppBar />
 
       <div css={CSS}>
         {/* Panel #1 with the discover campaign advertisement */}

@@ -8,24 +8,22 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 import Icon from '@/components/Icon';
 
 function DeadEndMenu(props) {
   const navigate = useNavigate();
   const { right } = props;
 
-  const CSS = css`
-    margin: 1rem;
-  `;
-
   const goBack = () => {
-    setTimeout(() => navigate('..'), 300);
+    setTimeout(() => navigate(-1), 300);
   };
 
   return (
     <AppBar
       position="static"
-      color="blanco"
+      color="white"
     >
       <Toolbar>
         <IconButton
@@ -38,7 +36,7 @@ function DeadEndMenu(props) {
           onClick={() => goBack()}
         >
           {/* <MenuIcon /> */}
-          <Icon be="arrow_back" />
+          <ArrowBackIcon color='primary'/>
         </IconButton>
       </Toolbar>
     </AppBar>

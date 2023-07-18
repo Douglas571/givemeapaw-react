@@ -28,6 +28,7 @@ import { useAuth } from '@/hooks/Auth';
 
 import NavBarEndMenu from '@/components/NavBarEndMenu';
 import Footer from '@/components/Footer';
+import KAppBar from '@/components/KAppBar'
 
 
 
@@ -85,13 +86,13 @@ function Login() {
   }
 
   return (
-    <div>
-      <NavBarEndMenu />
-      <Box sx={{ p: "2rem"}}>
+    <>
+      <KAppBar title='Iniciar Sesión' />
+      <Box sx={{ p: 2, mt: 7}}>
         <Paper>
           <Stack 
             spacing={4}
-            sx={{ p: "3rem" }}
+            sx={{ p: 3 }}
           >
             
             <Typography 
@@ -173,7 +174,7 @@ function Login() {
         </Paper>
       </Box>
       <Footer />
-    </div>
+    </>
   );
 }
 

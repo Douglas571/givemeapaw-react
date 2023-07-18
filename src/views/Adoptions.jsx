@@ -7,10 +7,7 @@ import TuneIcon from '@mui/icons-material/Tune';
 import MenuIcon from "@mui/icons-material/Menu";
 import finalPropsSelectorFactory from "react-redux/es/connect/selectorFactory";
 
-
-
-import MainMenu from '@/components/MainMenu'
-import CAppBar from '@/components/AppBar'
+import KAppBar from '@/components/KAppBar'
 
 export default function Adoptions() {
 
@@ -23,7 +20,7 @@ export default function Adoptions() {
     return (
         <>
             
-            <CAppBar title='Adopción'/>
+            <KAppBar title='Adopción'/>
             <Box mt={7} p={2}  sx={{background: '#f3f3f3', height: '100vh'}}>
                 <Stack gap={2}>
                     <Paper>
