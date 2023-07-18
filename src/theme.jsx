@@ -35,9 +35,6 @@ const theme = {
     white: {
       main: '#ffffff'
     },
-    blanco: {
-      main: 'red'
-    }
   },
   typography: {
     h3: {
