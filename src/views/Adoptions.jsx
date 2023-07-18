@@ -1,34 +1,29 @@
 // this section is intended to publish adoptions requests
-
+import { useState } from 'react'
 import { AppBar, Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, IconButton, Paper, Stack, TextField, Toolbar, Typography } from "@mui/material";
 
 // material icons
 import TuneIcon from '@mui/icons-material/Tune';
 import MenuIcon from "@mui/icons-material/Menu";
+import finalPropsSelectorFactory from "react-redux/es/connect/selectorFactory";
+
+
+
+import MainMenu from '@/components/MainMenu'
+import CAppBar from '@/components/AppBar'
 
 export default function Adoptions() {
+
+    const [ showSideMenu, setShowSideMenu ] = useState(false)
+
+    function toggleMenu() {
+        setShowSideMenu(!showSideMenu)
+    }
+
     return (
         <>
-            <Box>
-                <AppBar>
-                    <Toolbar>
-                        <IconButton
-                            color='inherit'
-                            edge='start'
-                            size='larger'
-                            sx={{ mr: 2 }}
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-
-                        <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                            Adopción
-                        </Typography>
-
-                        {/* <Button color='inherit'> login </Button> */}
-                    </Toolbar>
-                </AppBar>
-            </Box>
+            
+            <CAppBar title='Adopción'/>
             <Box mt={7} p={2}  sx={{background: '#f3f3f3', height: '100vh'}}>
                 <Stack gap={2}>
                     <Paper>
