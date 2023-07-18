@@ -32,8 +32,11 @@ const theme = {
     secondary: {
       main: '#F96153',
     },
+    white: {
+      main: '#ffffff'
+    },
     blanco: {
-      main: "#ff"
+      main: 'red'
     }
   },
   typography: {
