@@ -37,7 +37,6 @@ export default function Adoptions() {
                         </Stack>
                     </Paper>
 
-
                     <Card>
                         <CardActionArea>
                             <CardMedia

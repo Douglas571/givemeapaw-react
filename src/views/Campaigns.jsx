@@ -29,16 +29,19 @@ import TextField from "@mui/material/TextField";
 function SearchBar(props) {
   const { search, setSearch } = useState('')
   return (
-    <Paper sx={{ mb: 2, p: '4px', px: '20px', display: 'flex' }}>
-      <InputBase 
+    <TextField
         value={search} 
         sx={{ flex: 1 }} 
         placeholder='Busca campañas'
+
+        InputProps={{
+          endAdornment: (
+            <IconButton type='submit' aria-label='search'>
+              <SearchIcon />
+            </IconButton>
+          )
+        }}
       />
-      <IconButton type='submit' aria-label='search'>
-        <SearchIcon />
-      </IconButton>
-    </Paper>
   )
 }
 
@@ -59,7 +62,7 @@ function SorterBy(props) {
   }
 
   return (
-    <Select value={props.value} onChange={handleChange}>
+    <Select {...props} value={props.value} onChange={handleChange}>
       <MenuItem value={SORT_BY_STATES.DATE}>Fecha</MenuItem>
       <MenuItem value={SORT_BY_STATES.POPULARITY}>Popularidad</MenuItem>
     </Select>
@@ -73,7 +76,7 @@ function OrderBy(props) {
   }
 
   return (
-    <Select value={props.value} onChange={handleChange}>
+    <Select {...props} value={props.value} onChange={handleChange}>
       <MenuItem value={ORDER_BY_STATE.ASCENDING}>Ascendente</MenuItem>
       <MenuItem value={ORDER_BY_STATE.DESCENDING}>Descendente</MenuItem>
     </Select>
@@ -125,38 +128,39 @@ function Campaigns() {
   }
 
   return (
-    <div className="campaigns bg-slate-200">
-      <AppBar />
+    <>
+      <AppBar title='Campañas'/>
+      
+      <Box mt={7} p={2} sx={{background: '#f3f3f3', height: '100vh'}}>
+        <Paper sx={{p: 2}}>
 
-      <div className="p-5 h-screen">
-
-        <Box sx={{mb: 2}}>
-          <Paper sx={{p: 2}}>
-            <h1>Descubrir Campañas</h1>
-
+          <Stack gap={1}>
             <SearchBar/>
-            <Box sx={{ display: 'flex', gap: 1, 'flex-wrap': 'nowrap'}}>
+            <Stack direction='row' gap={1}>
               <SorterBy
-                value={sortBy}
-                handleSortByChange={handleSortByChange}
-              />
-              <OrderBy
-                value={orderBy}
-                handleOrderByChange={handleOrderByChange}
-              />
-            </Box>
-          </Paper>
+                  sx={{flexGrow: 1}}  
+                  value={sortBy}
+                  handleSortByChange={handleSortByChange}
+                />
+                <OrderBy
+                  sx={{flexGrow: 1}}
+                  value={orderBy}
+                  handleOrderByChange={handleOrderByChange}
+                />
+            </Stack>
+          </Stack>
+        </Paper>
 
 
-        </Box>
+      </Box>
 
-        <Stack spacing={2}>
-          { campaigns.map((c) => (
-            <CampaignItem campaign={c} key={c.id} />
-          ))}
-        </Stack>
-      </div>
-    </div>
+      <Stack spacing={2}>
+        { campaigns.map((c) => (
+          <CampaignItem campaign={c} key={c.id} />
+        ))}
+      </Stack>
+
+    </>
   );
 }
 

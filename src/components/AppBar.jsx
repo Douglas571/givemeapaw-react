@@ -30,8 +30,8 @@ export default function CAppBar(props) {
   return (
     <>
       <MainMenu show={showMenu} onClose={() => toggleMenu()} />
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" color="white">
+      
+        <AppBar color="white">
           <Toolbar>
             <IconButton
               data-test="appbar-menu"
@@ -51,7 +51,7 @@ export default function CAppBar(props) {
             {/* <Button color="inherit">Login</Button> */}
           </Toolbar>
         </AppBar>
-      </Box>
+      
     </>
   );
 }
