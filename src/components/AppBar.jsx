@@ -12,8 +12,10 @@ import MainMenu from '@/components/MainMenu'
 // import MenuIcon from '@mui/icons-material/Menu';
 import Icon from '@/components/Icon';
 
-export default function ButtonAppBar() {
+export default function CAppBar(props) {
   // Variables
+
+  const { title } = props
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate()
 
@@ -29,7 +31,7 @@ export default function ButtonAppBar() {
     <>
       <MainMenu show={showMenu} onClose={() => toggleMenu()} />
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" color="blanco">
+        <AppBar position="static" color="white">
           <Toolbar>
             <IconButton
               data-test="appbar-menu"
@@ -43,9 +45,8 @@ export default function ButtonAppBar() {
               {/* <MenuIcon /> */}
               <Icon be="menu" />
             </IconButton>
-            <Typography variant="h6" color="primary" component="div" sx={{ flexGrow: 1 }}
-              onClick={() => navigateToHome()}>
-              Give Me A Paw
+            <Typography variant="h6" color="primary" component="div" sx={{ flexGrow: 1 }}>
+              { title ? title : 'Give Me A Paw' }
             </Typography>
             {/* <Button color="inherit">Login</Button> */}
           </Toolbar>
