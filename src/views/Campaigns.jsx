@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 
@@ -16,15 +16,20 @@ import {
   Stack, 
   Typography } from '@mui/material'
 
+// for search bar
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
+import TextField from "@mui/material/TextField";
+
 import KAppBar from '@/components/KAppBar'
 import CampaignItem from '@/components/CampaignItem'
 
 import useCampaigns from '../hooks/useCampaigns';
 
-// for search bar
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
-import TextField from "@mui/material/TextField";
+// redux
+import { useSelector, useDispatch } from 'react-redux';
+import { update, updateAsync as updateCampaigns } from '@/services/actions/campaigns'
+
 
 function SearchBar(props) {
   const { search, setSearch } = useState('')
@@ -87,32 +92,18 @@ function OrderBy(props) {
 
 function Campaigns() {
   const navigate = useNavigate();
-  const [ campaigns, updateCampaigns ] = useCampaigns(); /* useState([
-    {
-      title: 'example1',
-      description: 'description example 1',
-      goal: 100,
-      collected: 0,
-      cover: '/img.jpg',
-      donations: []
-    },
-    {
-      title: 'example1',
-      description: 'description example 1',
-      goal: 100,
-      collected: 0,
-      cover: '/img.jpg',
-      donations: []
-    },
-    {
-      title: 'example1',
-      description: 'description example 1',
-      goal: 100,
-      collected: 0,
-      cover: '/img.jpg',
-      donations: []
-    }
-  ])*/
+  //const [ campaigns, updateCampaigns ] = useCampaigns(); 
+  const campaigns = useSelector(state => state.campaigns.value)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    console.log('dispaching event')
+    dispatch(updateCampaigns())
+  }, [])
+
+  /* useState()*/
+
+
   const [sortBy, setSortBy] = useState(SORT_BY_STATES.POPULARITY)
   const [orderBy, setOrderBy] = useState(ORDER_BY_STATE.ASCENDING)
 
@@ -151,14 +142,15 @@ function Campaigns() {
           </Stack>
         </Paper>
 
+        <Stack spacing={2} mt={2}>
+          { campaigns.map((c) => (
+            <CampaignItem campaign={c} key={c.id} />
+          ))}
+        </Stack>
 
       </Box>
 
-      <Stack spacing={2}>
-        { campaigns.map((c) => (
-          <CampaignItem campaign={c} key={c.id} />
-        ))}
-      </Stack>
+      
 
     </>
   );
