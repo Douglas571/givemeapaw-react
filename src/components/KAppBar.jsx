@@ -45,7 +45,6 @@ export default function KAppBar(props) {
             {/* <Button color="inherit">Login</Button> */}
           </Toolbar>
         </AppBar>
-      
     </>
   );
 }
