@@ -13,21 +13,23 @@ import ProgressBar from '@/components/ProgressBar'
 
 import DeadEndMenu from '@/components/DeadEndMenu';
 
+// redux toolkit
+import { useSelector, useDispatch } from 'react-redux'
+
+import { updateAsync } from '../services/actions/campaigns'
+
 function CampaignsView() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [campaign, setCampaign] = useState({});
+  
+  const campaigns = useSelector( state => state.campaigns.value )
+  const dispatch = useDispatch()
+  
 
   const [isDonating, setDonating] = useState(false);
 
   const fetchCampaign = async () => {
-    const newCampaign = await API.getCampaigns();
-    // console.log({newCampaign})
-
-    // console.log({id})
-    const theCampaign = newCampaign.find((c) => c.id === Number(id));
-    // console.log({theCampaign})
-    setCampaign(theCampaign)
+    dispatch(updateAsync)
   }
 
   useEffect(() => {

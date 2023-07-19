@@ -1,4 +1,4 @@
-import campaignsSlice from '../reducers/campaigns'
+import {campaignsSlice} from '../reducers/campaigns'
 
 export const { update, add } = campaignsSlice.actions
 

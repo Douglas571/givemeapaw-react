@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { getCampaigns } from '../../libs/api'
 
-const campaignsSlice = createSlice({
+export const campaignsSlice = createSlice({
   name: 'campaigns',
   initialState: {
     value: [],
