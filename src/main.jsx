@@ -15,7 +15,7 @@ import './index.css'
 import { Provider, useSelector, useDispatch } from 'react-redux'
 
 // import { increment, decrement } from './feactures/counter'
-import store from './store'
+import store from './services/store'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
