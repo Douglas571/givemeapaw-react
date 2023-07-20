@@ -3,7 +3,7 @@ import { Box, Paper, TextField, Typography, Button, Stack, Alert } from '@mui/ma
 
 
 import { useAuth } from '@/hooks/Auth';
-import NavBarEndMenu from "../components/NavBarEndMenu"
+import KAppBar from '@/components/KAppBar'
 import CampaignItem from '@/components/CampaignItem'
 
 import useCampaigns from '../hooks/useCampaigns';
@@ -111,11 +111,11 @@ const CampaignsAdmin = () => {
 
     return (
         <>
-            <NavBarEndMenu/>
+            <KAppBar title='Administración de Campañas'/>
 
-            <Box>
+            <Box mt={7} p={3}>
                 
-                <Paper sx={{ display: 'flex', 'flex-flow': 'column', gap: 2, m: 2, p: 2 }}>
+                <Paper sx={{ display: 'flex', 'flex-flow': 'column', gap: 2, p: 2 }}>
                 <Typography variant='h3'>Nueva Campaña</Typography>
                     <TextField 
                         label={'Nombre de la campaña'}
