@@ -10,32 +10,11 @@ import NavBarEndMenu from '../components/NavBarEndMenu'
 
 import {useAuth} from '@/hooks/Auth'
 
-
-async function getDonations() {
-    let donations = []
-
-    // make the fetch to get donations
-
-    try {
-        let res = await fetch('http://localhost:1337/api/donations?populate=*')
-        res = await res.json()
-
-        console.log({res})
-
-        donations = res.data.map(d => {
-            const newDonation = {id: d.id, ...d.attributes}
-            newDonation.date = new Date(Date.parse(d.attributes.publishedAt))
-            return newDonation
-        })
-        
-    } catch (err) {
-        console.log('error')
-    }
-
-    // filter the data
-
-    return donations
-}
+import { useSelector, useDispatch } from 'react-redux';
+import { 
+    updateAsync as updateDonations, 
+    removeAsync as removeDonation 
+} from '@/services/actions/donations'
 
 async function validateDonation(id, token) {
     let donationUpdated = {}
@@ -60,7 +39,7 @@ async function validateDonation(id, token) {
 }
 
 const Row = (props) => {
-    const { donation, key, onValidate }= props
+    const { donation, key, onValidate, onRemove }= props
     console.log({donation})
 
     const [ isOpen, setIsOpen ] = useState(false)
@@ -93,7 +72,7 @@ const Row = (props) => {
                         <CheckCircleIcon/>
                     </IconButton>
                     <IconButton 
-                        onClick={() => deleteDonation(donation.id)}
+                        onClick={() => onRemove(donation.id)}
                         color='error'>
                         <DeleteIcon/>
                     </IconButton>
@@ -134,15 +113,10 @@ const Row = (props) => {
 
 export default function DonationsAdmin() {
 
-    const [ donations, setDonations ] = useState([])
+    //const [ donations, setDonations ] = useState([])
+    const donations = useSelector(state => state.donations.value)
+    const dispatch = useDispatch()
     const { token } = useAuth()
-
-    const data = [
-        { amount: 5, reference: '0438' },
-        { amount: 5, reference: '0438' },
-        { amount: 5, reference: '0438' },
-        { amount: 5, reference: '0438' },
-    ]
     
     // TODO: finish the validation funciton.
     // - when client send the update, 
@@ -159,12 +133,14 @@ export default function DonationsAdmin() {
         return res
     }
 
-    useEffect(() => {
+    const handleRemove = async (id) => {
+        console.log('removing id: ', id)
 
-        getDonations()
-        .then( donations => {
-            setDonations(donations)
-        })
+    }
+
+    useEffect(() => {
+        console.log('useEffect: updateDonations')
+        dispatch(updateDonations())
 
     }, [])
 
@@ -187,7 +163,10 @@ export default function DonationsAdmin() {
                             </TableHead>
                             <TableBody>
                                 { donations.map((d) => (
-                                    <Row key={d.id} donation={d} onValidate={handleValidation}/>
+                                    <Row key={d.id} 
+                                        donation={d} 
+                                        onValidate={handleValidation}
+                                        onRemove={handleRemove}/>
                                 )) }
                             </TableBody>
                         </Table>

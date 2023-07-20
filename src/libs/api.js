@@ -50,6 +50,39 @@ export async function getCampaigns() {
   })
 }
 
-export function a() {
-  return 0;
+// DONATIONS
+
+async function getDonations() {
+  let donations = []
+
+  // make the fetch to get donations
+
+  try {
+      let res = await fetch('http://localhost:1337/api/donations?populate=*')
+      res = await res.json()
+
+      console.log({res})
+
+      donations = res.data.map(d => {
+          const newDonation = {id: d.id, ...d.attributes}
+          newDonation.date = new Date(Date.parse(d.attributes.publishedAt))
+          return newDonation
+      })
+  } catch (err) {
+      console.log('error')
+  }
+
+  // filter the data
+
+  return donations
 }
+
+async function removeDonations() {
+  return {}
+}
+
+export const donations = {
+  get: getDonations,
+  remove: removeDonations,
+}
+
