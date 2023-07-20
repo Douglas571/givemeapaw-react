@@ -1,7 +1,7 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 
-import { Button, Paper, Stack, TextField, Typography } from '@mui/material'
+import { Button, Paper, Stack, TextField, Typography, Alert } from '@mui/material'
 
 import DeadEndLayout from '@/layout/DeadEndLayout'
 import { Box } from '@mui/system'
@@ -9,6 +9,9 @@ import { Box } from '@mui/system'
 import {useAuth} from '@/hooks/Auth'
 
 const Donation = () => {
+  const [ inProcess, setInProcess ] = useState(false)
+  const [ isSuccessDonation, setIssuccessDonation ] = useState(false)
+  const [ error, setError ] = useState(false)
 
   const referenceInputRef = useRef(null)
 
@@ -29,6 +32,8 @@ const Donation = () => {
   }
 
   const makeDonation = async () => {
+    setInProcess(true)
+    setError(false)
     const reference = referenceInputRef.current.value
     console.log('the reference is: ', reference)
 
@@ -58,13 +63,17 @@ const Donation = () => {
 
       console.log({data})
 
+      if (data.error || !data.data.id) throw data.error
+
+      setIssuccessDonation(true)
+      return data.data
+
 
     } catch (err) {
       console.log({err})
+      setError(err)
+      setInProcess(false)
     }
-    
-
-    
   }
 
   return (
@@ -106,7 +115,10 @@ const Donation = () => {
           inputRef={referenceInputRef}
         />
 
-        <Button variant='contained' onClick={makeDonation}>Enviar referencia</Button>
+        { isSuccessDonation && (<Alert severity="success">¡Tu donación ha sido registrada exitosamente!</Alert>) }
+        { error && (<Alert severity="error">Ah ocurrido un error, intentalo más tarde.</Alert>)}
+
+        <Button disabled={inProcess} variant='contained' onClick={makeDonation}>Enviar referencia</Button>
 
       </Paper>
 
