@@ -77,8 +77,27 @@ async function getDonations() {
   return donations
 }
 
-async function removeDonations() {
-  return {}
+const APIRoute = 'http://localhost:1337/api/'
+
+async function removeDonations(id, token) {
+  
+  let res
+
+  try {
+    res = await fetch(APIRoute + 'donations/' + id, {
+      method: 'delete',
+      headers: {
+        Authorization: `Bearer ${token}`
+      },     
+    })
+
+    res = await res.json()
+
+  } catch(err) {
+    console.log(err)
+  }
+
+  return res?.data
 }
 
 export const donations = {

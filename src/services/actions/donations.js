@@ -21,12 +21,13 @@ export const updateAsync = () => {
     }
 }
 
-export const removeAsync = (id) => async (dispatch) =>  {
+export const removeAsync = ({id, token}) => async (dispatch) =>  {
+    console.log('removing id: ', id)
     try {
-        const donationsRemoved = await donationsAPI.remove(id)
-        console.log(donationRemoved)
+        const donationsRemoved = await donationsAPI.remove(id, token)
+        console.log(donationsRemoved)
         dispatch(remove(id))
     } catch(err) {
-        console.log(error)
+        console.log(err)
     }
 }

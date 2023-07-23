@@ -7,6 +7,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 
 import NavBarEndMenu from '../components/NavBarEndMenu'
+import KAppBar from '@/components/KAppBar'
 
 import {useAuth} from '@/hooks/Auth'
 
@@ -40,7 +41,7 @@ async function validateDonation(id, token) {
 
 const Row = (props) => {
     const { donation, key, onValidate, onRemove }= props
-    console.log({donation})
+    // console.log({donation})
 
     const [ isOpen, setIsOpen ] = useState(false)
 
@@ -118,13 +119,13 @@ export default function DonationsAdmin() {
     const dispatch = useDispatch()
     const { token } = useAuth()
     
-    // TODO: finish the validation funciton.
-    // - when client send the update, 
-    // it should update the donation row state
     const handleValidation = async (id) => {
+        console.log('validating donations')
         let res 
         try {
             res = await validateDonation(id, token)
+            // TODO: Make the updates more granular.
+            dispatch(updateDonations())
             console.log(res)
         } catch(err) {
             console.log(err)
@@ -134,26 +135,22 @@ export default function DonationsAdmin() {
     }
 
     const handleRemove = async (id) => {
-        console.log('removing id: ', id)
+        // TODO: request confirmation
+        dispatch(removeDonation({id, token}))
 
     }
 
     useEffect(() => {
         console.log('useEffect: updateDonations')
         dispatch(updateDonations())
-
     }, [])
 
-    return (
-        <>
-            <NavBarEndMenu/>
-            <Box sx={{ p: 3}}>
-                <Paper sx={{ p: 3}}>
-                    <Typography variant='h3'>
-                        Lista de donaciones
-                    </Typography>
+    let toRender
 
-                    <TableContainer>
+    if (donations.length == 0) {
+        toRender = <Typography sx={{ textAlign: 'center' }}>No hay donaciones</Typography>
+    } else {
+        toRender = (<TableContainer>
                         <Table>
                             <TableHead>
                                 <TableCell></TableCell>
@@ -162,7 +159,7 @@ export default function DonationsAdmin() {
                                 <TableCell></TableCell>
                             </TableHead>
                             <TableBody>
-                                { donations.map((d) => (
+                                { donations && donations.map((d) => (
                                     <Row key={d.id} 
                                         donation={d} 
                                         onValidate={handleValidation}
@@ -170,7 +167,17 @@ export default function DonationsAdmin() {
                                 )) }
                             </TableBody>
                         </Table>
-                    </TableContainer>
+                    </TableContainer>)
+    }
+
+    return (
+        <>
+            <KAppBar title='Lista de donaciones'/>
+            <Box sx={{ mt: 7, p: 3, height: '100%'}}>
+                <Paper sx={{ p: 3}}>
+
+                    { toRender }
+                    
                 </Paper>
             </Box>
         </>
