@@ -1,7 +1,9 @@
 # List of things to complete
 
-## Refactorings
+## General & Refactorings
 
+- deploy the backend on a server
+- deploy the frontend on github pages or vercel
 - make a layout component for basic usage
 
 ## PAGES
