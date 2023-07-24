@@ -16,6 +16,19 @@ export const donationsSlice = createSlice({
         const newState = state.value.filter( donation => donation.id !== idToDelete)
         state.value = newState
     },
+
+    validate: (state, action) => {
+      console.log({action})
+      const idToValidate = action.payload
+      console.log({idToValidate})
+      state.value = state.value.map( donation => {
+        if (donation.id == idToValidate) {
+          return {...donation, verified: true }
+        }
+
+        return donation
+      })
+    }
   }
 })
 

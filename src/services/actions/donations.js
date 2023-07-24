@@ -2,7 +2,7 @@ import {donationsSlice} from '../reducers/donations'
 import { donations as donationsAPI } from '../../libs/api'
 
 
-export const { update, remove } = donationsSlice.actions
+export const { update, remove, validate } = donationsSlice.actions
 
 
 
@@ -28,6 +28,16 @@ export const removeAsync = ({id, token}) => async (dispatch) =>  {
         console.log(donationsRemoved)
         dispatch(remove(id))
     } catch(err) {
+        console.log(err)
+    }
+}
+
+export const validateAsync = ({id, token}) => async (dispatch) => {
+    try {
+        const donationsValidated = await donationsAPI.validate(id, token)
+        console.log({donationsValidated})
+        dispatch(validate(id))
+    } catch(err){
         console.log(err)
     }
 }

@@ -1,4 +1,4 @@
-import { Box, Paper, Button, Table, TableCell, TableContainer, TableHead, Typography, TableBody, TableRow, IconButton, Link } from '@mui/material'
+import { Box, Paper, Button, Table, TableCell, TableContainer, TableHead, Typography, TableBody, TableRow, IconButton, Link, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material'
 import { useState, useEffect } from 'react'
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -14,30 +14,9 @@ import {useAuth} from '@/hooks/Auth'
 import { useSelector, useDispatch } from 'react-redux';
 import { 
     updateAsync as updateDonations, 
-    removeAsync as removeDonation 
+    removeAsync as removeDonation,
+    validateAsync as validateDonation,
 } from '@/services/actions/donations'
-
-async function validateDonation(id, token) {
-    let donationUpdated = {}
-
-    try {
-        let res = await fetch(`http://localhost:1337/api/donations/${id}`,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },        
-            method: 'PUT',
-            body: JSON.stringify({ data: {verified: true} }),
-        })
-        res = await res.json()
-        console.log({res})
-    } catch(err) {
-        console.log(err)
-    }
-
-    return donationUpdated
-}
 
 const Row = (props) => {
     const { donation, key, onValidate, onRemove }= props
@@ -112,6 +91,33 @@ const Row = (props) => {
     )
 }
 
+const ConfirmDialog = (props) => {
+    const { onClose, open } = props 
+
+    const handleClose = () => {
+        onClose()
+    }
+
+    const handleCancel = () => {
+        onClose(false)
+    }
+
+    const handleOk = () => {
+        onClose(true)
+    }
+
+    return (
+        <Dialog open={open} onClose={handleClose} sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight: 435 } }}>
+            <DialogTitle>Confirmar Eliminación</DialogTitle>
+            <DialogContent dividers><Typography>¿Seguro que quieres eliminar la donación?</Typography></DialogContent>
+            <DialogActions>
+                <Button onClick={handleCancel}>Cancelar</Button>
+                <Button onClick={handleOk} color='error'>Eliminar</Button>
+            </DialogActions>
+        </Dialog>
+    )
+}
+
 export default function DonationsAdmin() {
 
     //const [ donations, setDonations ] = useState([])
@@ -123,9 +129,8 @@ export default function DonationsAdmin() {
         console.log('validating donations')
         let res 
         try {
-            res = await validateDonation(id, token)
-            // TODO: Make the updates more granular.
-            dispatch(updateDonations())
+            // TODO: KEEP GOING... IS NOT TESTED...
+            dispatch(validateDonation({id, token}))
             console.log(res)
         } catch(err) {
             console.log(err)
@@ -134,10 +139,13 @@ export default function DonationsAdmin() {
         return res
     }
 
-    const handleRemove = async (id) => {
+    const handleRemove = (id) => {
         // TODO: request confirmation
-        dispatch(removeDonation({id, token}))
-
+        //dispatch(removeDonation({id, token}))
+        console.log('the id to delete is: ', id)
+        setIdToDelete(id)
+        openConfirmationDialog()
+        
     }
 
     useEffect(() => {
@@ -150,6 +158,7 @@ export default function DonationsAdmin() {
     if (donations.length == 0) {
         toRender = <Typography sx={{ textAlign: 'center' }}>No hay donaciones</Typography>
     } else {
+        console.log({donations})
         toRender = (<TableContainer>
                         <Table>
                             <TableHead>
@@ -163,17 +172,41 @@ export default function DonationsAdmin() {
                                     <Row key={d.id} 
                                         donation={d} 
                                         onValidate={handleValidation}
-                                        onRemove={handleRemove}/>
+                                        onRemove={() => handleRemove(d.id)}/>
                                 )) }
                             </TableBody>
                         </Table>
                     </TableContainer>)
     }
 
+    const [openDialog, setOpenDialog] = useState(false)
+    const [idToDelete, setIdToDelete] = useState(null)
+
+    const openConfirmationDialog = () => {
+        setOpenDialog(true)
+    }
+
+    const handleCloseConfirmationDialog = (response) => {
+        console.log('the response is: ', response, ' the id is: ', idToDelete)
+        setOpenDialog(false)
+
+        if (response) {
+            dispatch(removeDonation({id: idToDelete, token}))
+        }
+        
+        setIdToDelete(null)
+    }
+
+
+    // TODO: create the dialog button to confir the removal of a donation
     return (
         <>
             <KAppBar title='Lista de donaciones'/>
-            <Box sx={{ mt: 7, p: 3, height: '100%'}}>
+            
+            <Box sx={{ mt: 7, p: 3, minHeight: '100vh'}}>
+                
+            <ConfirmDialog open={openDialog} onClose={handleCloseConfirmationDialog}/>
+
                 <Paper sx={{ p: 3}}>
 
                     { toRender }
