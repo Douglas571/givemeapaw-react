@@ -43,6 +43,7 @@ export default function KAppBar(props) {
               { title ? title : 'Give Me A Paw' }
             </Typography>
             {/* <Button color="inherit">Login</Button> */}
+            { props.endAction }
           </Toolbar>
         </AppBar>
     </>

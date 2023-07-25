@@ -1,12 +1,17 @@
 import { useState, useRef, useEffect } from 'react'
-import { Box, Paper, TextField, Typography, Button, Stack, Alert } from '@mui/material'
+import { Box, Paper, TextField, Typography, 
+    Button, Stack, Alert, IconButton, 
+    Menu, MenuItem, Fab } from '@mui/material'
+
+import MoreVertIcon from '@mui/icons-material/MoreVert'
+import AddIcon from '@mui/icons-material/Add';
 
 
-import { useAuth } from '@/hooks/Auth';
+import { useAuth } from '@/hooks/Auth'
 import KAppBar from '@/components/KAppBar'
 import CampaignItem from '@/components/CampaignItem'
 
-import useCampaigns from '../hooks/useCampaigns';
+import useCampaigns from '../hooks/useCampaigns'
 
 const CampaignsAdmin = () => {
 
@@ -111,7 +116,24 @@ const CampaignsAdmin = () => {
 
     return (
         <>
-            <KAppBar title='Administración de Campañas'/>
+            <KAppBar 
+                title='Administración de Campañas'
+                // endAction={
+                //     (
+                //         <>
+                //             <IconButton
+                //                 color="primary"
+                //             >
+                //                 <MoreVertIcon/>
+                //             </IconButton>
+                //             <Menu>
+                //                 <MenuItem>Agregar</MenuItem>
+
+                //             </Menu>
+                //         </>
+                //     )
+                // }
+            />
 
             <Box mt={7} p={3}>
                 
@@ -180,6 +202,13 @@ const CampaignsAdmin = () => {
 
                 </Paper>
             </Box>
+
+            <Fab
+                sx={{position: 'fixed', right: 16 , bottom: 16}}
+                color='primary'
+            >
+                <AddIcon/>
+            </Fab>
         </>
     )
 }

@@ -24,9 +24,9 @@
 
 - Add a menu button in the app bar, with functions:
 
-  - create, edit, delete.
+  - create, delete.
 
-- fix iu: make the searchbar take full width
+- fix the ui layout, it should go to bottom
 
 ### /user/adoptions
 
@@ -42,6 +42,8 @@
 - make responsive
 - Add function to search campaigns
 - add footer
+
+- fix iu: make the searchbar take full width
 
 ## COMPONENTS
 
