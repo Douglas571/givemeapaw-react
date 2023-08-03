@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
-import { css } from '@emotion/react'
+import { useTheme } from '@mui/material/styles'
+
+import { ThemeContext, css } from '@emotion/react'
 
 import {useAuth} from '@/hooks/Auth'
 import { api as API } from '@/libs'
@@ -14,6 +16,7 @@ import ProgressBar from '@/components/ProgressBar'
 import DeadEndMenu from '@/components/DeadEndMenu';
 
 function CampaignsView() {
+  const theme = useTheme()
   const { id } = useParams();
   const navigate = useNavigate();
   const [campaign, setCampaign] = useState({});
@@ -59,7 +62,7 @@ function CampaignsView() {
   }
 
   return (
-    <div className="campaign">
+    <Box sx={{ background: theme.colors.background, minHeight: '100vh'}}>
       <DeadEndMenu />
 
       <Paper sx={{ m: 2, pb: .5 }}>
@@ -136,7 +139,7 @@ function CampaignsView() {
           </>
         )}
       </Paper>
-    </div>
+    </Box>
   )
 }
 

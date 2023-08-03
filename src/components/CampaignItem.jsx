@@ -8,14 +8,16 @@ import {Box, Card, CardActionArea, CardContent, CardMedia, Typography} from '@mu
 import ProgressBar from '@/components/ProgressBar';
 
 function CampaignItem(props) {
-  const { campaign } = props;
+  const { campaign, forCard } = props;
   const navigate = useNavigate();
 
   console.log(campaign)
   console.log(campaign.cover.url)
 
   return (
-    <Card>
+    <Card
+      {...forCard}
+    >
       <CardActionArea
         data-test="campaign-action"
         onClick={() => navigate(`${campaign.id}`)}

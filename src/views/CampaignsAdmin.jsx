@@ -190,25 +190,24 @@ const CampaignsAdmin = () => {
             {/*! remove for a while*/}
             <Box>
                 <Paper sx={{ display: 'flex', 'flex-flow': 'column', gap: 2, m: 2, p: 2 }}>
-                    <Typography variant='h3'>
-                        Campañas
-                    </Typography>
-
+                    
                     <Stack spacing={2}>
                         { campaigns.map((c) => (
-                            <CampaignItem campaign={c} key={c.id} />
+                            <CampaignItem campaign={c} key={c.id} forCard={{ variant: 'outlined' }} />
                         ))}
                     </Stack>
 
                 </Paper>
             </Box>
 
+            {/* NOTE: for when you change the way of add campaings
+
             <Fab
                 sx={{position: 'fixed', right: 16 , bottom: 16}}
                 color='primary'
             >
                 <AddIcon/>
-            </Fab>
+            </Fab> */}
         </>
     )
 }

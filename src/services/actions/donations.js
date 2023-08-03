@@ -4,7 +4,20 @@ import { donations as donationsAPI } from '../../libs/api'
 
 export const { update, remove, validate } = donationsSlice.actions
 
+function sortCampaigns(campaigns, sortBy, order) {
+    const result = []
 
+    // chose the metod to sort
+    if (sortBy == 'date') {
+        
+    }
+    // sort the array
+    // invert or revert according to order
+
+    // return
+
+    return result
+}
 
 export const updateAsync = () => {
     console.log('executing updateAsync')

@@ -52,7 +52,9 @@ function SearchBar(props) {
 
 const SORT_BY_STATES = {
   DATE: 'DATE',
-  POPULARITY: 'POPULARITY'
+  POPULARITY: 'POPULARITY',
+  ALPHABETICAL: 'ALPHABETICAL',
+
 }
 
 const ORDER_BY_STATE = {
@@ -70,6 +72,7 @@ function SorterBy(props) {
     <Select {...props} value={props.value} onChange={handleChange}>
       <MenuItem value={SORT_BY_STATES.DATE}>Fecha</MenuItem>
       <MenuItem value={SORT_BY_STATES.POPULARITY}>Popularidad</MenuItem>
+      <MenuItem value={SORT_BY_STATES.ALPHABETICAL}>Alfabeticamente</MenuItem>
     </Select>
   )
 }
@@ -104,7 +107,7 @@ function Campaigns() {
   /* useState()*/
 
 
-  const [sortBy, setSortBy] = useState(SORT_BY_STATES.POPULARITY)
+  const [sortBy, setSortBy] = useState(SORT_BY_STATES.ALPHABETICAL)
   const [orderBy, setOrderBy] = useState(ORDER_BY_STATE.ASCENDING)
 
 
@@ -122,12 +125,12 @@ function Campaigns() {
     <>
       <KAppBar title='Campañas'/>
       
-      <Box mt={7} p={2} sx={{background: '#f3f3f3', height: '100vh'}}>
+      <Box mt={7} p={2} sx={{background: '#f3f3f3', minHeight: '100vh'}}>
         <Paper sx={{p: 2}}>
 
           <Stack gap={1}>
             <SearchBar/>
-            <Stack direction='row' gap={1}>
+            <Stack direction={{ sm: 'column', md: 'row' }} gap={1}>
               <SorterBy
                   sx={{flexGrow: 1}}  
                   value={sortBy}

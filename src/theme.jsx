@@ -41,6 +41,17 @@ const theme = {
       fontWeight: 700,
     },
   },
+
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 300,
+      md: 600,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+
   components: {
     MuiLink: {
       defaultProps: {
