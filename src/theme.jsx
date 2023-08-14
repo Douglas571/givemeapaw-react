@@ -46,8 +46,8 @@ const theme = {
     values: {
       xs: 0,
       sm: 300,
-      md: 600,
-      lg: 1200,
+      md: 568,
+      lg: 1000,
       xl: 1536,
     },
   },

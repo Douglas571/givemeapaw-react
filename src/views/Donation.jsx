@@ -49,7 +49,7 @@ const Donation = () => {
     console.log({newDonation})
 
     try {
-      const res = await fetch('http://localhost:1337/api/donations', {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/donations`, {
         method: 'post',
         headers: {
           // Authorization: `Bearer ${token}`

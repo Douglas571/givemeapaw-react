@@ -14,6 +14,7 @@ import {
   MenuItem, 
   Select, 
   Stack, 
+  Grid,
   Typography } from '@mui/material'
 
 // for search bar
@@ -126,7 +127,7 @@ function Campaigns() {
       <KAppBar title='Campañas'/>
       
       <Box mt={7} p={2} sx={{background: '#f3f3f3', minHeight: '100vh'}}>
-        <Paper sx={{p: 2}}>
+        <Paper sx={{p: 2, mb: 2, maxWidth: '768px', mx: 'auto'}}>
 
           <Stack gap={1}>
             <SearchBar/>
@@ -145,11 +146,21 @@ function Campaigns() {
           </Stack>
         </Paper>
 
-        <Stack spacing={2} mt={2}>
+        <Grid 
+          container 
+          spacing={2}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+        >
           { campaigns.map((c) => (
-            <CampaignItem campaign={c} key={c.id} />
+            
+            <Grid item xs={12} md={4} lg={3}>
+              <CampaignItem campaign={c} key={c.id} forCard={{ sx:{ minHeight:'350px'} }}/>
+            </Grid>
+
           ))}
-        </Stack>
+        </Grid>
 
       </Box>
 

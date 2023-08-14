@@ -88,7 +88,7 @@ const CampaignsAdmin = () => {
 
         console.log('publishing campaign...')
         console.log({token})
-        let res = await fetch('http://localhost:1337/api/campaigns', {
+        let res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/campaigns`, {
             headers: {
                 Authorization: `Bearer ${token}`
             },        

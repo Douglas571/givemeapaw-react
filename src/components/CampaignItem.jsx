@@ -23,7 +23,7 @@ function CampaignItem(props) {
         onClick={() => navigate(`${campaign.id}`)}
       >
         <CardMedia
-          sx={{ height: 140 }}
+          sx={{ height: '200px' }}
           image={ campaign.cover.url || "public/img.jpg"}
           title="dogs"
         />

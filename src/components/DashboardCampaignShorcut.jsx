@@ -8,7 +8,7 @@ const DashboardCampaignShorcut = (props) => {
   return (
     <div className="flex gap-4 border-solid border-divisor border-[1px] rounded-md p-5 mb-5
       hover:shadow-lg">
-      <Avatar src={'http://localhost:1337' + campaign.cover?.formats?.thumbnail?.url}/> 
+      <Avatar src={import.meta.env.VITE_BACKEND_URL + campaign.cover?.formats?.thumbnail?.url}/> 
       <div className='grow'>
       <Typography variant='h6' key={campaign.id}>{campaign.title}</Typography>
       <div className='mb-2 flex justify-between'>

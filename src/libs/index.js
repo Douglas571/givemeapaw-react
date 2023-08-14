@@ -1,13 +1,14 @@
 // import * as fakeServer from './fake-server';
 
-const HOST = 'http://localhost:1337';
+const HOST = import.meta.env.VITE_BACKEND_URL;
+const API_URL = `${HOST}/api`
 
 export async function login(authData) {
   // const theUser = fakeServer.data.users.find( u => u.email === user?.email )
 
   console.log({ authData });
 
-  const response = await fetch('http://localhost:1337/api/auth/local', {
+  const response = await fetch(`${API_URL}/auth/local`, {
     method: 'POST',
     headers: {
       Connection: 'keep-alive',
@@ -39,7 +40,7 @@ export async function login(authData) {
 }
 
 export async function regist(newUser) {
-  const response = await fetch(`http://localhost:1337/api/auth/local/register`, {
+  const response = await fetch(`${API_URL}/auth/local/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

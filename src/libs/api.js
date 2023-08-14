@@ -1,6 +1,7 @@
 import * as fakeServer from './fake-server';
 
-const HOST = 'http://localhost:1337/api';
+const HOST = import.meta.env.VITE_BACKEND_URL;
+const API_URL = `${HOST}/api`
 
 
 // for fetch the campaigns from the api
@@ -8,7 +9,7 @@ export async function getCampaigns() {
   let campaigns = [];
 
   try {
-    let res = await fetch(`${HOST}/campaigns?populate=*`, {
+    let res = await fetch(`${API_URL}/campaigns?populate=*`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +44,7 @@ export async function getCampaigns() {
       id: c.id,
       ...c.attributes,
       cover: {
-        url: "http://localhost:1337" + c.attributes.cover.data?.attributes.url,
+        url: HOST + c.attributes.cover.data?.attributes.url,
         formats: c.attributes.cover.data?.attributes.formats,
       },
     }
@@ -58,7 +59,7 @@ async function getDonations() {
   // make the fetch to get donations
 
   try {
-      let res = await fetch('http://localhost:1337/api/donations?populate=*')
+      let res = await fetch(`${API_URL}/donations?populate=*`)
       res = await res.json()
 
       console.log({res})
@@ -77,13 +78,13 @@ async function getDonations() {
   return donations
 }
 
-const APIRoute = 'http://localhost:1337/api/'
+const APIRoute = API_URL
 
 async function validateDonation(id, token) {
   let donationUpdated = {}
 
   try {
-      let res = await fetch(`http://localhost:1337/api/donations/${id}`,
+      let res = await fetch(`${API_URL}/donations/${id}`,
       {
           headers: {
               Authorization: `Bearer ${token}`,

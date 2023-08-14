@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom/client'
 
 import App from './App'
 
-
-
-
 // Tirth party CSS
 import 'material-icons/iconfont/material-icons.css'
 
@@ -16,7 +13,6 @@ import { Provider, useSelector, useDispatch } from 'react-redux'
 
 // import { increment, decrement } from './feactures/counter'
 import store from './services/store'
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
