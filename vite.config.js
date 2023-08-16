@@ -18,6 +18,6 @@ export default defineConfig({
         plugins: ['@emotion/babel-plugin'],
       },
     }),
-    vercel(),
+    //vercel(),
   ],
 });
