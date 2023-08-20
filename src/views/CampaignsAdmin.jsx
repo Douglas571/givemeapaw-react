@@ -88,30 +88,38 @@ const CampaignsAdmin = () => {
 
         console.log('publishing campaign...')
         console.log({token})
-        let res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/campaigns`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            },        
-            method: 'post',
-            body: formData
-        })
+        let res
 
-        console.log('requested to server.')
+        try {
+            res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/campaigns`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },        
+                method: 'post',
+                body: formData
+            })
 
-        // to check the response
-        const json = await res.json()
-        const msg = await json
-        console.log({jsonResponse: msg})
+            console.log('requested to server.')
 
-        // to apper and disapper the success message
-        setSuccess(true)
-        setTimeout(() => {
-            console.log('in 5sec the message will disapper')
-            setSuccess(false)
-        }, 5000)
+            // to check the response
+            const json = await res.json()
+            const msg = await json
+            console.log({jsonResponse: msg})
+
+            // to apper and disapper the success message
+            setSuccess(true)
+            setTimeout(() => {
+                console.log('in 5sec the message will disapper')
+                setSuccess(false)
+            }, 5000)
+            
+            cleanFields()
+            // updateCampaigns()
+            
+        } catch(err) {
+            console.log(err)
+        }
         
-        cleanFields()
-        updateCampaigns()
     }
 
     return (

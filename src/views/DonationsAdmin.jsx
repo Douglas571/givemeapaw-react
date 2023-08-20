@@ -198,7 +198,7 @@ export default function DonationsAdmin() {
     }
 
 
-    // TODO: create the dialog button to confir the removal of a donation
+    // TODO: create the dialog button to confirm the removal of a donation
     return (
         <>
             <KAppBar title='Lista de donaciones'/>
