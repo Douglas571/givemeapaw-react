@@ -4,15 +4,24 @@ const HOST = import.meta.env.VITE_BACKEND_URL;
 const API_URL = `${HOST}/api`
 
 
+function customFetch(route, {method, headers}) {
+  return fetch(`${API_URL}${route}`, {
+    method: (method) ? method : 'GET',
+    headers: {
+      'ngrok-skip-browser-warning': true,
+      ...headers,
+    },
+  })
+}
+
 // for fetch the campaigns from the api
 export async function getCampaigns() {
   let campaigns = [];
 
   try {
-    let res = await fetch(`${API_URL}/campaigns?populate=*`, {
+    let res = await customFetch(`/campaigns?populate=*`, {
       method: 'GET',
       headers: {
-        'ngrok-skip-browser-warning': true,
         'Content-Type': 'application/json',
       },
     });
@@ -60,7 +69,7 @@ async function getDonations() {
   // make the fetch to get donations
 
   try {
-      let res = await fetch(`${API_URL}/donations?populate=*`)
+      let res = await customFetch(`/donations?populate=*`)
       res = await res.json()
 
       console.log({res})
